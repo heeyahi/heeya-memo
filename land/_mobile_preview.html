@@ -11,7 +11,7 @@
   <div class="phone"><span class="cap">iPhone 390 × 844</span><iframe id="ph" src="./index.html#home" title="모바일 미리보기"></iframe></div>
   <script>
     var p=new URLSearchParams(location.search), t=p.get('tab')||'home';
-    document.getElementById('ph').src='./index.html#'+t;
+    document.getElementById('ph').src='./index.html?v='+Date.now()+'#'+t;
   </script>
 </body>
 </html>
