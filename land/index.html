@@ -237,8 +237,8 @@ img,svg{max-width:100%}
 .gc-head h2{font-size:16.5px;font-weight:800;display:flex;align-items:center;gap:7px}
 .gc-head h2 .em{font-size:19px}
 .gc-desc{font-size:12px;color:var(--sub);margin-bottom:12px}
-.dice-stage{display:flex;gap:14px;justify-content:center;align-items:center;padding:14px 0 10px;min-height:104px}
-.die{width:74px;height:74px;border-radius:18px;background:linear-gradient(160deg,#fff,#FFF4FA);border:2px solid #FFD9E9;box-shadow:0 10px 22px rgba(255,140,180,.16),inset 0 -4px 0 rgba(255,196,220,.35);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:9px;gap:2px;transition:transform .2s}
+.dice-stage{position:relative;display:flex;gap:16px;justify-content:center;align-items:center;padding:18px 0;min-height:124px;border-radius:20px;background:radial-gradient(120% 95% at 50% 18%,#FFF1F8 0%,#FFFAFD 58%,#FAF7FF 100%);border:1px dashed #FFE0EE;margin-bottom:12px}
+.die{width:82px;height:82px;border-radius:20px;background:linear-gradient(160deg,#fff,#FFF4FA);border:2px solid #FFD9E9;box-shadow:0 10px 22px rgba(255,140,180,.16),inset 0 -4px 0 rgba(255,196,220,.35);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:9px;gap:2px;transition:transform .2s}
 .die.rolling{animation:diceShake .15s infinite}
 @keyframes diceShake{0%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(7deg) translateY(-7px)}100%{transform:rotate(-7deg) translateY(0)}}
 .die.win{border-color:#FFB0CF;box-shadow:0 0 0 4px rgba(255,176,207,.28),0 10px 22px rgba(255,140,180,.2)}
@@ -264,10 +264,10 @@ img,svg{max-width:100%}
 .lane-hit:hover .lane-bg{fill:#FFF0F7}
 
 /* fruit */
-.fruit-wrap{display:flex;gap:34px;align-items:center;justify-content:center;flex-wrap:wrap}
-.fruit-side{flex:0 1 260px;min-width:220px;max-width:300px}
+.fruit-wrap{display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap}
+.fruit-side{flex:0 0 172px;width:172px}
 .fruit-board-wrap{flex:0 0 auto;margin:0 auto}
-.fruit-board{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:linear-gradient(160deg,#FFF0F7,#F3F8FF);border:1px solid #FFE2EF;border-radius:20px;padding:9px;width:min(340px,86vw);touch-action:none;box-shadow:inset 0 2px 10px rgba(240,150,190,.08)}
+.fruit-board{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:linear-gradient(160deg,#FFF0F7,#F3F8FF);border:1px solid #FFE2EF;border-radius:20px;padding:9px;width:min(380px,86vw);touch-action:none;box-shadow:inset 0 2px 10px rgba(240,150,190,.08)}
 .fcell{position:relative;aspect-ratio:1;border-radius:13px;background:rgba(255,255,255,.72);display:grid;place-items:center;overflow:hidden}
 .ftile{position:absolute;inset:0;border-radius:13px;display:grid;place-items:center;font-size:clamp(18px,5.4vw,26px);box-shadow:inset 0 -3px 0 rgba(150,90,120,.08),0 2px 6px rgba(180,120,150,.1)}
 .ftile span{font-size:9px;font-weight:900;color:rgba(120,70,95,.55);position:absolute;bottom:2px;right:4px;letter-spacing:-.4px}
@@ -283,7 +283,7 @@ img,svg{max-width:100%}
 .lv9{background:linear-gradient(160deg,#E5FBF2,#CCF5E4)}
 .lv10{background:linear-gradient(160deg,#FFEFF7,#FFD6EC)}
 .lv11{background:linear-gradient(160deg,#DDF6E6,#B9EBCF)}
-.score-row{display:flex;gap:8px;margin:0 auto 16px;max-width:620px}
+.score-row{display:flex;gap:8px;margin:0 auto 14px;max-width:380px}
 .score-pill{flex:1;background:#FFF7FB;border:1px solid #FBE4EF;border-radius:14px;padding:9px 12px;text-align:center}
 .score-pill small{display:block;font-size:10.5px;color:var(--sub);font-weight:700}
 .score-pill b{font-size:18px;color:#D65B90;letter-spacing:-.5px}
@@ -301,8 +301,8 @@ img,svg{max-width:100%}
 .wheel-pointer{position:absolute;left:50%;top:-9px;transform:translateX(-50%);width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-top:19px solid #FF6FAE;z-index:3;filter:drop-shadow(0 3px 3px rgba(200,80,130,.3))}
 .wheel-box::after{content:'🍒';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:21px;box-shadow:0 4px 12px rgba(220,120,160,.25),inset 0 0 0 3px #FFE7F2;z-index:2}
 #wheel{display:block;width:100%;height:auto;border-radius:50%;box-shadow:0 12px 30px rgba(240,140,180,.2),0 0 0 6px #fff,0 0 0 8px #FFE0EE;transition:transform 4.2s cubic-bezier(.15,.72,.05,1)}
-.prize-legend{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0 14px}
-.prize-legend span{font-size:11px;font-weight:700;color:#8B7180;background:#FFF7FB;border:1px solid #FBE4EF;border-radius:999px;padding:4px 9px}
+.prize-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:12px 0 14px}
+.prize-legend span{font-size:10.5px;font-weight:700;color:#8B7180;background:#FFF7FB;border:1px solid #FBE4EF;border-radius:999px;padding:4px 4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .spin-meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--sub);margin-top:9px}
 .shop-grid-items{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 @media(max-width:520px){.shop-grid-items{grid-template-columns:1fr}}
@@ -427,7 +427,7 @@ img,svg{max-width:100%}
   .footer{padding:20px 14px 34px}
   .pf b{font-size:16px}
   .fruit-wrap{gap:6px}
-  .fruit-side{order:2;width:100%;max-width:none;flex:1 1 100%}
+  .fruit-side{order:2;width:100%;flex:1 1 100%}
   .fruit-board-wrap{order:1}
   .score-row{max-width:none}
 }
@@ -773,7 +773,7 @@ img,svg{max-width:100%}
             <button class="right" data-dir="right" aria-label="오른쪽">▶</button>
             <button class="new" id="fruitNew">새 게임 시작</button>
           </div>
-          <p class="empty-note">게임이 끝나면 점수만큼 코인을 받아요 🪙</p>
+          <p class="empty-note">점수만큼 코인 보상 🪙</p>
         </div>
         <div class="fruit-board-wrap">
           <div class="fruit-board" id="fruitBoard" aria-label="과일 합치기 보드"></div>
