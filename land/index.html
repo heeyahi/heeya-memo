@@ -219,17 +219,17 @@ img,svg{max-width:100%}
 .pledge{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border-radius:16px;background:#FFFBFD;border:1px solid #FBEDF4}
 .pledge .st{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:15px;background:var(--mint-soft);flex:0 0 auto}
 .pledge.ing .st{background:var(--sky-soft)}
-.pledge.soon .st{background:#F3EEFF}
+.pledge.hold .st{background:#F3EEFF}
 .pledge-main{flex:1;min-width:0}
 .pledge-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .pledge-top b{font-size:13.5px}
 .pledge-top .s{font-size:10.5px;font-weight:900;padding:3px 8px;border-radius:999px;background:var(--mint-soft);color:#2FA57F;white-space:nowrap}
 .pledge.ing .pledge-top .s{background:var(--sky-soft);color:#4E97CF}
-.pledge.soon .pledge-top .s{background:#F1EBFF;color:#8B6FE0}
+.pledge.hold .pledge-top .s{background:#F1EBFF;color:#8B6FE0}
 .pledge small{display:block;color:var(--sub);font-size:11.5px;margin:3px 0 7px}
 .pledge .bar i{background:linear-gradient(90deg,#8BE5C8,#4FCFA5)}
 .pledge.ing .bar i{background:linear-gradient(90deg,#9BD8FF,#5FB8F5)}
-.pledge.soon .bar i{background:linear-gradient(90deg,#CDBBFF,#A88CF7)}
+.pledge.hold .bar i{background:linear-gradient(90deg,#CDBBFF,#A88CF7)}
 
 /* ============ play ============ */
 .play-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
@@ -411,11 +411,137 @@ img,svg{max-width:100%}
 .m-row b{color:#D65B90}
 .m-row .neg{color:#5B9BE8}
 
+/* ============ nav badge ============ */
+.t-full{display:inline}
+.t-short{display:none}
+.nbadge{display:none;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#FF4D8D;color:#fff;font-size:10px;font-weight:900;line-height:17px;text-align:center;margin-left:5px;vertical-align:1px;box-shadow:0 2px 6px rgba(255,77,141,.35)}
+.nbadge.on{display:inline-block;animation:nbadgeIn .3s ease}
+@keyframes nbadgeIn{0%{transform:scale(.5)}70%{transform:scale(1.18)}100%{transform:none}}
+
+/* ============ shop sub-tabs ============ */
+.subtabs{display:flex;gap:5px;background:#FFF7FB;border:1px solid #FBE4EF;border-radius:999px;padding:4px;margin-bottom:12px}
+.subtab{flex:1;border:0;background:transparent;color:#A8809A;font-size:12.5px;font-weight:800;padding:9px 6px;border-radius:999px;cursor:pointer;transition:.18s;white-space:nowrap;letter-spacing:-.4px}
+.subtab:hover{color:#E2538E}
+.subtab.on{background:#fff;color:#E2538E;box-shadow:0 3px 12px rgba(240,140,180,.2)}
+.subtab-note{font-size:11.5px;color:var(--sub);margin:-2px 0 12px;line-height:1.55;background:#FFFAFD;border:1px dashed #F8DDEB;border-radius:12px;padding:8px 11px}
+.subtab-note b{color:#C4708F}
+.si-tag{display:inline-block;font-size:9.5px;font-weight:900;letter-spacing:.2px;color:#B3658C;background:#FFEFF7;border-radius:999px;padding:2px 7px;margin-bottom:4px}
+.si-owned{display:inline-block;font-size:10px;font-weight:800;color:#2FA57F;background:#F1FCF7;border-radius:999px;padding:3px 8px;margin-top:-2px}
+
+/* ============ broadcast overlay preview ============ */
+.ovl{position:fixed;left:50%;top:10px;z-index:130;width:min(94vw,470px);transform:translate(-50%,-170%);transition:transform .45s cubic-bezier(.2,.9,.3,1.15);pointer-events:none}
+.ovl.on{transform:translate(-50%,0)}
+.ovl-card{background:linear-gradient(135deg,rgba(44,30,42,.95),rgba(78,46,64,.95));color:#FFF4FA;border:1.5px solid rgba(255,180,215,.55);border-radius:18px;padding:10px 15px 12px;box-shadow:0 18px 44px rgba(80,40,60,.36);display:flex;flex-direction:column;gap:6px}
+.ovl-tag{align-self:flex-start;font-size:10px;font-weight:900;color:#FFD6E8;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 8px;letter-spacing:.1px}
+.ovl-line{display:flex;align-items:center;gap:10px}
+.ovl-em{font-size:26px;line-height:1;filter:drop-shadow(0 4px 10px rgba(255,150,195,.55));animation:ovlPop .6s ease}
+@keyframes ovlPop{0%{transform:scale(.4) rotate(-12deg)}60%{transform:scale(1.18) rotate(6deg)}100%{transform:none}}
+.ovl-txt{font-size:13.5px;font-weight:700;line-height:1.45;letter-spacing:-.2px}
+.ovl-txt b{color:#FFC2DC}
+.ovl-txt strong{color:#FFE9A8;font-weight:900}
+.ovl-txt small{display:block;font-size:11px;font-weight:600;color:#E7C6D6;margin-top:2px}
+
+/* ============ mock push ============ */
+.push{position:fixed;right:18px;bottom:18px;z-index:125;width:min(340px,calc(100vw - 24px));transform:translateY(26px);opacity:0;pointer-events:none;transition:.32s ease}
+.push.on{transform:none;opacity:1;pointer-events:auto}
+.push-card{background:#313338;color:#DBDEE1;border-radius:14px;padding:11px 13px;box-shadow:0 16px 36px rgba(20,10,25,.35);border:1px solid #3F4147}
+.push-head{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.push-av{width:26px;height:26px;border-radius:8px;background:linear-gradient(140deg,#FF95C2,#FF6FAE);display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.push-head b{display:block;font-size:12px;color:#fff;line-height:1.2}
+.push-head small{font-size:9.5px;color:#949BA4}
+.push-x{margin-left:auto;border:0;background:transparent;color:#949BA4;font-size:12px;cursor:pointer;padding:2px 4px}
+.push-body{font-size:12px;line-height:1.55;border-left:3px solid #FF7FB4;padding-left:9px;color:#D7DBE0;word-break:break-word}
+.push-body b{color:#fff}
+.push-body em{font-style:normal;color:#FFC2DC;font-weight:700}
+.push-body .memo{color:#B5BAC1}
+.push-foot{margin-top:6px;font-size:10.5px;color:#949BA4}
+
+/* ============ home pledge mini ============ */
+.hm-pledges{display:flex;flex-direction:column;gap:8px}
+.hm-pl{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:12px;background:#FFFBFD;border:1px solid #FBEDF4}
+.hm-pl .em{font-size:14px;flex:0 0 auto}
+.hm-pl b{flex:1;min-width:0;font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm-pl .s{font-size:9.5px;font-weight:900;padding:3px 7px;border-radius:999px;background:#E2F9F1;color:#2FA57F;white-space:nowrap}
+.hm-pl.ing .s{background:#E4F4FF;color:#4E97CF}
+.hm-pl.hold .s{background:#F1EBFF;color:#8B6FE0}
+
+/* ============ admin ============ */
+.adm-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:16px;align-items:start}
+@media(max-width:900px){.adm-grid{grid-template-columns:1fr}}
+.adm-note{font-size:11.5px;color:var(--sub);margin:-4px 0 12px;line-height:1.55}
+.adm-list{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.adm-pledge{border:1px solid #FBEDF4;background:#FFFBFD;border-radius:15px;padding:11px 12px}
+.adm-pledge.done{border-color:#D8F3E7;background:linear-gradient(100deg,#F4FDF9,#FBFEFD)}
+.adm-pledge.ing{border-color:#DCEEFF;background:linear-gradient(100deg,#F4FAFF,#FCFEFF)}
+.adm-pledge.hold{border-color:#E7DEFF;background:linear-gradient(100deg,#FAF7FF,#FDFCFF)}
+.ap-top{display:flex;align-items:flex-start;gap:8px}
+.ap-top b{flex:1;font-size:13px;line-height:1.35;word-break:break-word}
+.ap-del{border:0;background:#FFF1F7;color:#C4708F;min-width:24px;height:24px;border-radius:8px;font-size:11px;font-weight:900;cursor:pointer;flex:0 0 auto;transition:.15s;padding:0 6px}
+.ap-del:hover{background:#FFE2EF}
+.ap-del.armed{background:#E2538E;color:#fff}
+.adm-pledge small{display:block;font-size:11.5px;color:var(--sub);margin:3px 0 8px;line-height:1.45;word-break:break-word}
+.ap-toggles{display:flex;gap:5px;flex-wrap:wrap}
+.stbtn{border:1.5px solid #F1E1EA;background:#fff;color:#A8809A;border-radius:999px;padding:5px 9px;font-size:10.5px;font-weight:900;cursor:pointer;transition:.15s}
+.stbtn:hover{border-color:#FFC2DC;color:#D65B90}
+.stbtn.on[data-st="ing"]{background:#E4F4FF;border-color:#B8E0FF;color:#3F87BE}
+.stbtn.on[data-st="done"]{background:#E2F9F1;border-color:#B6EBD8;color:#2FA57F}
+.stbtn.on[data-st="hold"]{background:#F1EBFF;border-color:#DACDFF;color:#8B6FE0}
+.adm-form{display:flex;flex-direction:column;gap:7px;background:#FFFAFD;border:1px dashed #F3DDE8;border-radius:15px;padding:11px}
+.adm-form input,.adm-form select{border:1.5px solid #FBE4EF;border-radius:10px;padding:9px 11px;font-family:inherit;font-size:12.5px;color:var(--ink);background:#fff;outline:none;width:100%;transition:.16s}
+.adm-form input:focus,.adm-form select:focus{border-color:#FFB0CF;box-shadow:0 0 0 3px rgba(255,176,207,.16)}
+.adm-form-row{display:flex;gap:7px;align-items:center}
+.adm-form-row select{flex:1}
+.adm-form-row .btn{flex:0 0 auto;padding:10px 13px;font-size:12.5px;white-space:nowrap}
+.adm-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.adm-req-list{display:flex;flex-direction:column;gap:9px}
+.req-card{border:1px solid #FFE3EF;background:#FFFCFD;border-radius:15px;padding:11px 12px;transition:.2s}
+.req-card.done{background:#F7FBF9;border-color:#DDF3E9}
+.req-top{display:flex;align-items:center;gap:8px}
+.req-em{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;background:linear-gradient(140deg,#FFE7F2,#E9F4FF);flex:0 0 auto}
+.req-main{flex:1;min-width:0}
+.req-main b{font-size:12.5px}
+.req-main span{display:block;font-size:11.5px;color:#C4708F;font-weight:800;margin-top:1px}
+.req-st{font-size:9.5px;font-weight:900;padding:3px 7px;border-radius:999px;background:#FFEFF7;color:#D65B90;white-space:nowrap}
+.req-card.done .req-st{background:#E2F9F1;color:#2FA57F}
+.req-memo{margin:8px 0 0;font-size:12px;color:var(--ink-2);line-height:1.5;background:#FFF7FB;border-radius:10px;padding:7px 9px;word-break:break-word;white-space:pre-wrap}
+.req-card.done .req-memo{background:#F3FAF7;color:#7C938A}
+.req-foot{display:flex;align-items:center;gap:8px;margin-top:8px}
+.req-time{font-size:10.5px;color:var(--sub);font-weight:700}
+.req-done{margin-left:auto;border:0;background:linear-gradient(135deg,#8BE5C8,#4FCFA5);color:#fff;border-radius:999px;padding:6px 12px;font-size:11px;font-weight:900;cursor:pointer;box-shadow:0 4px 10px rgba(79,207,165,.25);transition:.16s}
+.req-done:hover{transform:translateY(-1px)}
+.req-undo{margin-left:auto;border:1.5px solid #E6EFEA;background:#fff;color:#8FA79C;border-radius:999px;padding:5px 10px;font-size:10.5px;font-weight:800;cursor:pointer}
+.req-empty{font-size:12px;color:var(--sub);text-align:center;padding:18px 0;line-height:1.6}
+
+/* ============ inventory status ============ */
+.inv-st{font-style:normal;font-size:9.5px;font-weight:900;padding:2px 7px;border-radius:999px;margin-left:5px;background:#FFF1F7;color:#D65B90}
+.inv-st.ok{background:#fff;color:#2FA57F}
+
+/* ============ exchange modal ============ */
+.ex-modal{max-width:380px;text-align:left}
+.ex-modal .m-em{font-size:38px;margin-bottom:2px;text-align:center}
+.ex-modal h3{font-size:16.5px;text-align:center}
+.ex-modal #exDesc{text-align:center;margin-bottom:14px}
+.ex-label{display:block;font-size:11.5px;font-weight:800;color:var(--ink-2);margin-bottom:10px}
+.ex-label input,.ex-label textarea{display:block;width:100%;margin-top:5px;border:1.5px solid #FBE4EF;border-radius:11px;padding:10px 12px;font-family:inherit;font-size:13px;color:var(--ink);background:#fff;outline:none;resize:vertical;letter-spacing:-.2px}
+.ex-label input:focus,.ex-label textarea:focus{border-color:#FFB0CF;box-shadow:0 0 0 3px rgba(255,176,207,.16)}
+.ex-label textarea{min-height:62px}
+.ex-meter{display:flex;justify-content:flex-end;font-size:10.5px;color:var(--sub);margin:-6px 0 8px}
+.ex-price-row{display:flex;justify-content:space-between;align-items:center;background:#FFF7FB;border:1px solid #FBE4EF;border-radius:12px;padding:9px 12px;font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:11px}
+.ex-price-row b{color:#D65B90;font-size:13px}
+.ex-quick{display:block;width:100%;margin-top:8px;border:1.5px dashed #F3DDE8;background:#fff;color:#B58CA0;border-radius:999px;padding:9px;font-size:11.5px;font-weight:800;cursor:pointer;font-family:inherit}
+.ex-quick:hover{border-color:#FFC2DC;color:#D65B90}
+.ex-cancel{display:block;width:100%;margin-top:8px;border:0;background:none;color:#B58CA0;font-size:11.5px;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-family:inherit}
+
 @media(max-width:760px){
   .nav-in{padding:8px 12px;gap:8px;flex-wrap:wrap}
   .tabs{order:4;width:100%;margin:0 -2px;padding-bottom:2px}
-  .tab{font-size:11.5px;padding:7px 8px;letter-spacing:-.4px}
-  .tabs{gap:2px}
+  .tab{font-size:11px;padding:7px 6px;letter-spacing:-.5px}
+  .tabs{gap:1px}
+  .t-full{display:none}
+  .t-short{display:inline}
+  .nbadge{margin-left:2px;min-width:15px;height:15px;line-height:15px;font-size:9.5px;padding:0 3px;vertical-align:0}
+  .ovl{top:8px}
+  .push{right:12px;left:12px;bottom:74px;width:auto}
   .logo-mark{width:34px;height:34px;border-radius:12px}
   .logo-text{font-size:17px}
   .wallet{padding:6px 12px 6px 9px;font-size:13px}
@@ -481,8 +607,9 @@ img,svg{max-width:100%}
       <button class="tab active" data-tab="home">🏠 홈</button>
       <button class="tab" data-tab="sig">💃 시그표</button>
       <button class="tab" data-tab="play">🎮 놀이터</button>
-      <button class="tab" data-tab="shop">🎡 상점·룰렛</button>
-      <button class="tab" data-tab="market">📈 주식·게시판</button>
+      <button class="tab" data-tab="shop"><span class="t-full">🎡 상점·룰렛</span><span class="t-short">🎡 상점</span></button>
+      <button class="tab" data-tab="market"><span class="t-full">📈 주식·게시판</span><span class="t-short">📈 주식</span></button>
+      <button class="tab" data-tab="admin">👑 관리자<span class="nbadge" id="adminBadge">0</span></button>
     </nav>
     <button class="wallet" id="wallet" title="내 코인 지갑">
       <span class="ico">🌰</span><span id="coinAmt">1,500</span><span class="unit">코인</span>
@@ -673,6 +800,14 @@ img,svg{max-width:100%}
 
         <div class="card">
           <div class="card-head">
+            <h2><span>📜</span>공약현황</h2>
+            <button class="mini-btn" data-go="sig">시그표에서 보기</button>
+          </div>
+          <div class="hm-pledges" id="homePledges"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
             <h2><span>🎈</span>희야랜드 준비 중</h2>
             <span class="chip soft">로드맵</span>
           </div>
@@ -721,7 +856,7 @@ img,svg{max-width:100%}
     <div class="card" style="margin-top:18px">
       <div class="card-head">
         <h2><span>📜</span>공약현황</h2>
-        <span class="chip mint">달성 3 · 진행 2</span>
+        <span class="chip mint" id="pledgeStat">✅ 3 · ⏳ 1 · 🌙 1</span>
       </div>
       <div class="pledge-list" id="pledgeList"></div>
     </div>
@@ -809,7 +944,7 @@ img,svg{max-width:100%}
   <!-- ================= SHOP ================= -->
   <section class="view" id="view-shop">
     <div class="section-head">
-      <div><h2>🎡 상점·룰렛</h2><p>코인으로 룰렛을 돌리고, 상점에서 굿즈를 교환해 보세요</p></div>
+      <div><h2>🎡 상점·룰렛</h2><p>코인으로 룰렛을 돌리고, 시그·역팬 굿즈를 교환해 보세요</p></div>
       <span class="chip">1회 50 코인</span>
     </div>
 
@@ -836,6 +971,11 @@ img,svg{max-width:100%}
           <h2><span>🛒</span>코인 상점</h2>
           <span class="chip soft">교환하면 보관함에 담겨요</span>
         </div>
+        <div class="subtabs" id="shopCatTabs" role="tablist" aria-label="상점 카테고리">
+          <button class="subtab on" data-shopcat="sig" role="tab" aria-selected="true">💃 시그</button>
+          <button class="subtab" data-shopcat="fan" role="tab" aria-selected="false">💌 역팬·굿즈</button>
+        </div>
+        <p class="subtab-note" id="shopCatNote"></p>
         <div class="shop-grid-items" id="shopItems"></div>
       </div>
     </div>
@@ -884,6 +1024,50 @@ img,svg{max-width:100%}
       <div class="post-list" id="postList"></div>
     </div>
   </section>
+
+  <!-- ================= ADMIN ================= -->
+  <section class="view" id="view-admin">
+    <div class="section-head">
+      <div><h2>👑 관리자</h2><p>공약 관리 · 역팬 교환 요청 처리 · 희야만 보는 화면 (체험용)</p></div>
+      <span class="chip" id="adminHeadChip">대기 2건</span>
+    </div>
+
+    <div class="adm-grid">
+      <!-- pledges -->
+      <div class="card">
+        <div class="card-head">
+          <h2><span>📜</span>① 공약 관리</h2>
+          <span class="chip mint" id="adminPledgeCount">공약 5개</span>
+        </div>
+        <p class="adm-note">상태를 누르면 바로 <b>시그표·홈 공약현황</b>에 반영돼요. ✕를 두 번 누르면 삭제됩니다.</p>
+        <div class="adm-list" id="adminPledgeList"></div>
+        <form class="adm-form" id="pledgeForm">
+          <input id="plTitle" maxlength="40" placeholder="새 공약 제목 (예: 유튜브 구독자 1만)" autocomplete="off">
+          <input id="plDesc" maxlength="80" placeholder="조건·설명 (예: 12월까지 · 달성 시 전원 방셀)" autocomplete="off">
+          <div class="adm-form-row">
+            <select id="plSt" aria-label="공약 상태">
+              <option value="ing">진행중</option>
+              <option value="done">달성</option>
+              <option value="hold">보류</option>
+            </select>
+            <button class="btn btn-primary btn-sm" type="submit">+ 새 공약 추가</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- requests -->
+      <div class="card">
+        <div class="card-head">
+          <h2><span>💌</span>② 역팬 · 교환 요청</h2>
+          <span class="chip" id="reqStat">대기 2 · 완료 0</span>
+        </div>
+        <div class="adm-tools">
+          <button class="btn btn-ghost btn-sm" id="notiTest">🔔 알림 테스트 (디스코드·폰 푸시 미리보기)</button>
+        </div>
+        <div class="adm-req-list" id="reqList"></div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -896,6 +1080,46 @@ img,svg{max-width:100%}
 </footer>
 
 <div id="toasts" aria-live="polite"></div>
+
+<!-- 방송 화면 오버레이 미리보기 -->
+<div class="ovl" id="ovl" aria-hidden="true">
+  <div class="ovl-card">
+    <span class="ovl-tag">📺 방송 화면 오버레이 미리보기 · Freecshot Plus / OBS</span>
+    <div class="ovl-line">
+      <span class="ovl-em" id="ovlEm">💗</span>
+      <div class="ovl-txt"><b id="ovlNick">쌈8</b>님이 <strong id="ovlItem">[희야 하트 시그]</strong>를 발동했습니다!<small id="ovlSub">실제 방송에서는 시청자 화면 위에 이렇게 떠요</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- 디스코드·폰 푸시 미리보기 -->
+<div class="push" id="push" aria-hidden="true">
+  <div class="push-card">
+    <div class="push-head">
+      <span class="push-av">🔔</span>
+      <div><b>희야랜드 알림</b><small>디스코드 · 폰 푸시 미리보기</small></div>
+      <button class="push-x" id="pushClose" aria-label="닫기">✕</button>
+    </div>
+    <div class="push-body" id="pushBody"></div>
+    <div class="push-foot" id="pushFoot"></div>
+  </div>
+</div>
+
+<!-- 역팬 신청 모달 -->
+<div class="modal-bg" id="exBg">
+  <div class="modal ex-modal" role="dialog" aria-modal="true" aria-labelledby="exTitle">
+    <div class="m-em" id="exEmoji">💌</div>
+    <h3 id="exTitle">개인 방셀 역팬권</h3>
+    <p id="exDesc">설명</p>
+    <label class="ex-label">SOOP 닉네임<input id="exNick" maxlength="12" value="하이희야팬" autocomplete="off"></label>
+    <label class="ex-label">한마디 · 요청 메모 (선택)<textarea id="exMemo" maxlength="60" placeholder="예: 생일 방셀에 이름 넣어주세요!"></textarea></label>
+    <div class="ex-meter"><span id="exMemoCount">0 / 60</span></div>
+    <div class="ex-price-row"><span>사용 코인</span><b id="exPrice">1,200 코인</b></div>
+    <button class="btn btn-primary btn-block" id="exSend">역팬 신청 보내기</button>
+    <button class="ex-quick" id="exQuick">메모 없이 바로 신청</button>
+    <button class="ex-cancel" id="exCancel">닫기</button>
+  </div>
+</div>
 
 <div class="modal-bg" id="modalBg">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -939,6 +1163,20 @@ const QUESTS=[
   {id:'roulette',name:'행운 룰렛 돌리기',need:1,reward:100,ico:'🎡'},
   {id:'post',name:'게시판에 글 남기기',need:1,reward:120,ico:'✏️'}
 ];
+const PLEDGE_DEFS=[
+  {id:'pl1',t:'씨나인 볼링 내전 1위',d:'2026.11.21 · 희야팀 우승 (팀원 정산 각 30,003개)',st:'done'},
+  {id:'pl2',t:'두산CK 배틀 3위',d:'2026.11.11 · 별풍선 232,934개 · 최고 동접 1,345명',st:'done'},
+  {id:'pl3',t:'지흡 회복 후 복귀 방송',d:'2026.11.18 · [씨나인 6호] 복귀 완료',st:'done'},
+  {id:'pl4',t:'유튜브 채널 개설',d:'채널명·첫 영상 준비 중',st:'ing'},
+  {id:'pl5',t:'희피투게더 시즌 2',d:'다음 야외 보라 준비 중 · 일정 조율',st:'hold'}
+];
+function demoRequests(){
+  const now=Date.now();
+  return [
+    {id:'r_seed1',itemId:'banseol',itemName:'개인 방셀 역팬권',emoji:'💌',nick:'쌈8',memo:'생일 방셀에 이름 넣어주세요! 11/28 생일이에요 🎂',ts:now-1000*60*47,status:'waiting'},
+    {id:'r_seed2',itemId:'coffee',itemName:'메가커피 아메리카노',emoji:'☕',nick:'부산황대표',memo:'아이스 아메리카노 · 얼음은 조금만 부탁드려요',ts:now-1000*60*152,status:'waiting'}
+  ];
+}
 
 function freshState(){
   const s={
@@ -946,7 +1184,11 @@ function freshState(){
     checked:null, streak:0, diceLog:[],
     questDate:todayKey(), quests:{checkin:0,minigame:0,roulette:0,post:0}, claimed:{},
     history:[], inventory:{}, posts:[], likes:{}, spinCount:0,
-    fruitBest:0, stocks:{}, holdings:{}, sigLikes:{}
+    fruitBest:0, stocks:{}, holdings:{}, sigLikes:{},
+    pledges:PLEDGE_DEFS.map(p=>Object.assign({},p)),
+    requests:demoRequests(),
+    lastReqNick:'하이희야팬',
+    ver:2
   };
   STOCK_DEFS.forEach(d=>s.stocks[d.sym]={price:d.price,open:d.price,hist:[d.price]});
   return s;
@@ -971,6 +1213,21 @@ function loadState(){
   if(!s.inventory||typeof s.inventory!=='object') s.inventory={};
   if(!s.likes||typeof s.likes!=='object') s.likes={};
   if(!s.sigLikes||typeof s.sigLikes!=='object') s.sigLikes={};
+  if(!Array.isArray(s.pledges)) s.pledges=PLEDGE_DEFS.map(p=>Object.assign({},p));
+  else s.pledges=s.pledges.filter(p=>p&&typeof p.t==='string').map(p=>({
+    id:p.id||('pl'+Math.random().toString(36).slice(2,8)),
+    t:p.t.slice(0,40),
+    d:typeof p.d==='string'?p.d.slice(0,80):'',
+    st:(p.st==='done'||p.st==='hold'||p.st==='ing')?p.st:(p.st==='soon'?'hold':'ing')
+  }));
+  if(!Array.isArray(s.requests)) s.requests=demoRequests();
+  else s.requests=s.requests.filter(r=>r&&typeof r.itemName==='string').map(r=>({
+    id:r.id||('r'+Math.random().toString(36).slice(2,8)),
+    itemId:r.itemId||'', itemName:r.itemName, emoji:r.emoji||'💌',
+    nick:r.nick||'익명의 팬', memo:r.memo||'', ts:r.ts||Date.now(),
+    status:r.status==='done'?'done':'waiting'
+  }));
+  if(typeof s.lastReqNick!=='string') s.lastReqNick='하이희야팬';
   ensureDay(s);
   return s;
 }
@@ -1053,10 +1310,14 @@ $('#modalReset').addEventListener('click',()=>{
   location.reload();
 });
 $('#modalBg').addEventListener('click',e=>{ if(e.target===$('#modalBg')) closeModal(); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&$('#modalBg').classList.contains('on')) closeModal(); });
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  if($('#modalBg').classList.contains('on')) closeModal();
+  else if($('#exBg').classList.contains('on')) closeExchange();
+});
 
 /* ---------- routing ---------- */
-const TABS=['home','sig','play','shop','market'];
+const TABS=['home','sig','play','shop','market','admin'];
 let current='home';
 function go(tab){
   if(TABS.indexOf(tab)<0) tab='home';
@@ -1066,7 +1327,8 @@ function go(tab){
   if(location.hash!=='#'+tab){ try{ history.replaceState(null,'','#'+tab); }catch(e){ location.hash=tab; } }
   window.scrollTo({top:0,behavior:'smooth'});
   if(tab==='market'){ renderStocks(); startTicks(); } else stopTicks();
-  if(tab==='shop'){ drawWheel(); updateSpinUI(); }
+  if(tab==='shop'){ drawWheel(); updateSpinUI(); renderShopItems(); renderInventory(); }
+  if(tab==='admin'){ renderAdminPledges(); renderRequests(); }
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-tab]');
@@ -1218,26 +1480,172 @@ function renderSigMini(){
   });
 }
 
-const PLEDGES=[
-  {t:'씨나인 볼링 내전 1위',d:'2026.11.21 · 희야팀 우승 (팀원 정산 각 30,003개)',st:'done',p:100},
-  {t:'두산CK 배틀 3위',d:'2026.11.11 · 별풍선 232,934개 · 최고 동접 1,345명',st:'done',p:100},
-  {t:'지흡 회복 후 복귀 방송',d:'2026.11.18 · [씨나인 6호] 복귀 완료',st:'done',p:100},
-  {t:'유튜브 채널 개설',d:'채널명·첫 영상 준비 중',st:'ing',p:70},
-  {t:'희피투게더 시즌 2',d:'다음 야외 보라 준비 중',st:'soon',p:15}
-];
+/* ---------- pledge (공약현황) ---------- */
+const PL_ST={
+  ing:{label:'진행 중',cls:'ing',ico:'⏳'},
+  done:{label:'달성',cls:'done',ico:'✅'},
+  hold:{label:'보류',cls:'hold',ico:'🌙'}
+};
+function plMeta(st){ return PL_ST[st]||PL_ST.ing; }
+function plPct(st){ return st==='done'?100:(st==='hold'?15:70); }
+function plLabel(st){ return plMeta(st).label; }
+function plCounts(){
+  let done=0,ing=0,hold=0;
+  s.pledges.forEach(p=>{ if(p.st==='done') done++; else if(p.st==='hold') hold++; else ing++; });
+  return {done:done,ing:ing,hold:hold};
+}
 function renderPledges(){
-  const box=$('#pledgeList'); box.innerHTML='';
-  PLEDGES.forEach(p=>{
-    const label=p.st==='done'?'달성':p.st==='ing'?'진행 중':'예정';
-    const ico=p.st==='done'?'✅':p.st==='ing'?'⏳':'🌙';
+  const box=$('#pledgeList');
+  if(box){
+    box.innerHTML='';
+    if(!s.pledges.length){
+      box.innerHTML='<p class="muted" style="text-align:center;padding:14px 0">등록된 공약이 없어요 · 👑 관리자 탭에서 추가할 수 있어요</p>';
+    }
+    s.pledges.forEach(p=>{
+      const m=plMeta(p.st);
+      const el=document.createElement('div');
+      el.className='pledge '+m.cls;
+      el.innerHTML='<div class="st">'+m.ico+'</div><div class="pledge-main">'+
+        '<div class="pledge-top"><b>'+esc(p.t)+'</b><span class="s">'+m.label+'</span></div>'+
+        '<small>'+esc(p.d||'설명 없음')+'</small><div class="bar"><i style="width:'+plPct(p.st)+'%"></i></div></div>';
+      box.appendChild(el);
+    });
+    const c=plCounts();
+    const chip=$('#pledgeStat');
+    if(chip) chip.textContent='✅ '+c.done+' · ⏳ '+c.ing+' · 🌙 '+c.hold;
+    const ac=$('#adminPledgeCount');
+    if(ac) ac.textContent='공약 '+s.pledges.length+'개';
+  }
+  renderHomePledges();
+  renderAdminPledges();
+}
+function renderHomePledges(){
+  const box=$('#homePledges'); if(!box) return;
+  if(!s.pledges.length){ box.innerHTML='<p class="muted">등록된 공약이 없어요.</p>'; return; }
+  box.innerHTML=s.pledges.slice(0,3).map(p=>{
+    const m=plMeta(p.st);
+    return '<div class="hm-pl '+m.cls+'"><span class="em">'+m.ico+'</span><b>'+esc(p.t)+'</b><span class="s">'+m.label+'</span></div>';
+  }).join('');
+}
+
+/* ---------- admin ---------- */
+let delArm=null, delTimer=null;
+const REQ_POOL=[
+  {nick:'햅삐히야',itemName:'희야 포토카드',emoji:'🖼️',memo:'우리집 강아지랑 같이 찍은 컨셉으로 주세요 🐶'},
+  {nick:'플디러버',itemName:'SOOP 쪽지 답장권',emoji:'📮',memo:'방송 끝나고 쪽지 확인 부탁드려요!'},
+  {nick:'씨나인6호',itemName:'개인 방셀 역팬권',emoji:'💌',memo:'복귀 방송 감사 방셀 기대할게요 🌿'}
+];
+function renderBadge(){
+  const n=(s.requests||[]).filter(r=>r.status==='waiting').length;
+  const b=$('#adminBadge');
+  if(b){ b.textContent=n>9?'9+':n; b.classList.toggle('on',n>0); }
+  const chip=$('#adminHeadChip');
+  if(chip) chip.textContent=n>0?('대기 '+n+'건'):'대기 없음';
+}
+function renderAdminPledges(){
+  const box=$('#adminPledgeList'); if(!box) return;
+  box.innerHTML='';
+  if(!s.pledges.length){
+    box.innerHTML='<p class="req-empty">아직 공약이 없어요.<br>아래에서 첫 공약을 추가해 보세요.</p>';
+  }
+  s.pledges.forEach(p=>{
+    const m=plMeta(p.st);
     const el=document.createElement('div');
-    el.className='pledge '+p.st;
-    el.innerHTML='<div class="st">'+ico+'</div><div class="pledge-main">'+
-      '<div class="pledge-top"><b>'+esc(p.t)+'</b><span class="s">'+label+'</span></div>'+
-      '<small>'+esc(p.d)+'</small><div class="bar"><i style="width:'+p.p+'%"></i></div></div>';
+    el.className='adm-pledge '+m.cls;
+    el.innerHTML='<div class="ap-top"><b>'+esc(p.t)+'</b>'+
+      '<button class="ap-del'+(delArm===p.id?' armed':'')+'" data-pldel="'+esc(p.id)+'" aria-label="공약 삭제">'+(delArm===p.id?'삭제?':'✕')+'</button></div>'+
+      '<small>'+esc(p.d||'설명 없음')+'</small>'+
+      '<div class="ap-toggles">'+['ing','done','hold'].map(st=>
+        '<button class="stbtn'+(p.st===st?' on':'')+'" data-pl="'+esc(p.id)+'" data-st="'+st+'">'+PL_ST[st].label+'</button>').join('')+'</div>';
     box.appendChild(el);
   });
 }
+function renderRequests(){
+  const box=$('#reqList'); if(!box) return;
+  box.innerHTML='';
+  const list=s.requests||[];
+  if(!list.length){
+    box.innerHTML='<p class="req-empty">아직 들어온 교환 요청이 없어요.<br>💌 역팬·굿즈 상점에서 신청이 오면 여기에 쌓여요.</p>';
+  }
+  list.forEach(r=>{
+    const done=r.status==='done';
+    const el=document.createElement('div');
+    el.className='req-card'+(done?' done':'');
+    el.innerHTML='<div class="req-top"><span class="req-em">'+esc(r.emoji||'💌')+'</span>'+
+        '<div class="req-main"><b>'+esc(r.nick||'익명의 팬')+'</b><span>'+esc(r.itemName)+'</span></div>'+
+        '<span class="req-st">'+(done?'완료됨':'대기중')+'</span></div>'+
+      (r.memo?'<p class="req-memo">'+esc(r.memo)+'</p>':'')+
+      '<div class="req-foot"><span class="req-time">'+timeAgo(r.ts)+'</span>'+
+        (done?'<button class="req-undo" data-requndo="'+esc(r.id)+'">↩ 되돌리기</button>'
+             :'<button class="req-done" data-reqdone="'+esc(r.id)+'">✓ 완료 처리</button>')+'</div>';
+    box.appendChild(el);
+  });
+  const w=list.filter(r=>r.status==='waiting').length;
+  const st=$('#reqStat');
+  if(st) st.textContent='대기 '+w+' · 완료 '+(list.length-w);
+  renderBadge();
+  renderInventory();
+}
+$('#adminPledgeList').addEventListener('click',e=>{
+  const d=e.target.closest('[data-pldel]');
+  if(d){
+    const id=d.dataset.pldel;
+    if(delArm!==id){
+      delArm=id;
+      if(delTimer) clearTimeout(delTimer);
+      delTimer=setTimeout(()=>{ delArm=null; renderAdminPledges(); },3200);
+      renderAdminPledges();
+      return;
+    }
+    s.pledges=s.pledges.filter(p=>p.id!==id);
+    delArm=null; if(delTimer) clearTimeout(delTimer);
+    save(); renderPledges();
+    toast('공약을 삭제했어요','🗑️');
+    return;
+  }
+  const b=e.target.closest('[data-pl]');
+  if(b){
+    const p=s.pledges.find(x=>x.id===b.dataset.pl); if(!p) return;
+    const st=b.dataset.st;
+    if(p.st===st) return;
+    p.st=st; save(); renderPledges();
+    toast('"'+p.t+'" → '+plLabel(st),'📜');
+  }
+});
+$('#pledgeForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const t=($('#plTitle').value||'').trim();
+  const d=($('#plDesc').value||'').trim();
+  const st=$('#plSt').value;
+  if(!t){ toast('공약 제목을 적어주세요','✏️'); try{ $('#plTitle').focus(); }catch(err){} return; }
+  s.pledges.unshift({id:'pl'+Date.now().toString(36),t:t.slice(0,40),d:d.slice(0,80),st:(PL_ST[st]?st:'ing')});
+  save();
+  $('#plTitle').value=''; $('#plDesc').value=''; $('#plSt').value='ing';
+  renderPledges();
+  toast('새 공약 추가! 시그표·홈 공약현황에 바로 반영됐어요','📜');
+});
+$('#reqList').addEventListener('click',e=>{
+  const d=e.target.closest('[data-reqdone]');
+  if(d){
+    const r=s.requests.find(x=>x.id===d.dataset.reqdone); if(!r) return;
+    r.status='done'; r.doneTs=Date.now(); save();
+    renderRequests();
+    toast('"'+r.nick+'"님 요청 완료 처리 · 보관함도 완료 표시','✅');
+    return;
+  }
+  const u=e.target.closest('[data-requndo]');
+  if(u){
+    const r=s.requests.find(x=>x.id===u.dataset.requndo); if(!r) return;
+    r.status='waiting'; delete r.doneTs; save();
+    renderRequests();
+    toast('다시 대기중으로 되돌렸어요','↩️');
+  }
+});
+$('#notiTest').addEventListener('click',()=>{
+  const p=REQ_POOL[Math.floor(Math.random()*REQ_POOL.length)];
+  showPush(p);
+  toast('알림 미리보기를 띄웠어요 · 실제 요청은 생기지 않아요','🔔');
+});
 
 /* ---------- dice ---------- */
 const dice={bet:100,pick:'odd',rolling:false,vals:[3,4]};
@@ -1619,46 +2027,163 @@ function spin(){
 $('#spinBtn').addEventListener('click',spin);
 
 /* ---------- shop ---------- */
-const SHOP=[
-  {id:'banseol',name:'방셀 우선권',desc:'다음 방셀에 내 이름 먼저 (데모)',price:1200,emoji:'💌',g:'linear-gradient(140deg,#FFE2EF,#FFC9DF)'},
-  {id:'sigpass',name:'시그 1회 신청권',desc:'원하는 시그를 한 번 신청 (데모)',price:800,emoji:'💃',g:'linear-gradient(140deg,#F0E9FF,#E0D4FF)'},
-  {id:'coffee',name:'메가커피 기프티콘',desc:'아이스 아메리카노 1잔 (데모)',price:1500,emoji:'☕',g:'linear-gradient(140deg,#E8F3FF,#D2E8FF)'},
-  {id:'photocard',name:'희야 포토카드',desc:'랜덤 포토카드 1장 (데모)',price:400,emoji:'🖼️',g:'linear-gradient(140deg,#FFEAF1,#FFD8E6)'},
-  {id:'badge',name:'응원 뱃지',desc:'닉네임 옆에 뱃지 표시 (데모)',price:200,emoji:'🎀',g:'linear-gradient(140deg,#FFF0DC,#FFE0BC)'},
-  {id:'spinticket',name:'룰렛 3회권',desc:'룰렛을 3번 더 돌릴 수 있어요 (데모)',price:150,emoji:'🎡',g:'linear-gradient(140deg,#E4FBF1,#CFF5E5)'}
+const SHOP_SIG=[
+  {id:'sig_heart',name:'희야 하트 시그',desc:'손하트 + 윙크 3초',price:300,emoji:'💗',tag:'인기',ovl:1,g:'linear-gradient(140deg,#FFE2EF,#FFC9DF)'},
+  {id:'sig_ppikki',name:'삐끼삐끼 시그',desc:'삐끼삐끼 챌린지 풀버전',price:450,emoji:'🕺',tag:'인기',ovl:1,g:'linear-gradient(140deg,#F0E9FF,#E0D4FF)'},
+  {id:'sig_zero',name:'제로투 10초',desc:'제로투 10초 · 노래방 버전',price:500,emoji:'🌀',tag:'신작',ovl:1,g:'linear-gradient(140deg,#E4F4FF,#CDE7FF)'},
+  {id:'sig_aegyo',name:'애교 3종 세트',desc:'윙크 · 볼하트 · 뽀뽀 콤보',price:700,emoji:'😘',tag:'프리미엄',ovl:1,g:'linear-gradient(140deg,#FFF1DC,#FFE1BB)'},
+  {id:'sig_ending',name:'엔딩 포즈',desc:'방송 끝 인사 + 포즈',price:250,emoji:'✨',tag:'',ovl:1,g:'linear-gradient(140deg,#E4FBF0,#CCF3E2)'}
 ];
-function renderShop(){
-  const box=$('#shopItems'); box.innerHTML='';
-  SHOP.forEach(it=>{
+const SHOP_FAN=[
+  {id:'banseol',name:'개인 방셀 역팬권',desc:'내 닉네임으로 개인 방셀 제작',price:1200,emoji:'💌',req:true,hint:'방셀에 넣을 말·상황을 적어주세요',g:'linear-gradient(140deg,#FFE2EF,#FFC9DF)'},
+  {id:'soopnote',name:'SOOP 쪽지 답장권',desc:'쪽지 한 통에 답장 받기',price:600,emoji:'📮',req:true,hint:'보낼 쪽지 내용을 적어주세요',g:'linear-gradient(140deg,#E8F3FF,#D2E8FF)'},
+  {id:'coffee',name:'메가커피 아메리카노',desc:'아이스 아메리카노 1잔 · 기프티콘',price:1500,emoji:'☕',req:true,hint:'원하는 메뉴·요청사항 (예: 샷 추가)',g:'linear-gradient(140deg,#E4FBF1,#CFF5E5)'},
+  {id:'photocard',name:'희야 포토카드',desc:'랜덤 포토카드 1장',price:400,emoji:'🖼️',req:true,hint:'갖고 싶은 컨셉 (예: 볼링날)',g:'linear-gradient(140deg,#FFEAF1,#FFD8E6)'},
+  {id:'spinticket',name:'룰렛 3회권',desc:'룰렛을 3번 더 돌릴 수 있어요 · 바로 적용',price:150,emoji:'🎡',req:false,g:'linear-gradient(140deg,#FFF0DC,#FFE0BC)'}
+];
+const SHOP_CAT_NOTE={
+  sig:'💃 <b>시그</b>는 방송에 바로 뜨는 시그 리액션이에요. 구매하면 <b>방송 화면 오버레이 미리보기</b>가 떠요.',
+  fan:'💌 <b>역팬·굿즈</b>는 신청하면 <b>관리자 탭 대기열</b>에 쌓여요. 희야가 <b>완료 처리</b>하면 내 보관함에도 완료 표시가 남아요.'
+};
+let shopCat='sig';
+function shopList(){ return shopCat==='sig'?SHOP_SIG:SHOP_FAN; }
+function renderShopItems(){
+  const box=$('#shopItems'); if(!box) return;
+  box.innerHTML='';
+  shopList().forEach(it=>{
+    const owned=s.inventory[it.id]||0;
     const el=document.createElement('div'); el.className='shop-item';
     el.innerHTML='<div class="si-thumb" style="background:'+it.g+'">'+it.emoji+'</div>'+
-      '<div class="si-body"><b>'+esc(it.name)+'</b><small>'+esc(it.desc)+'</small></div>'+
+      '<div class="si-body">'+(it.tag?'<span class="si-tag">'+esc(it.tag)+'</span>':'')+
+        '<b>'+esc(it.name)+'</b><small>'+esc(it.desc)+'</small>'+
+        (owned?'<div class="si-owned">🎒 보관함 × '+owned+'</div>':'')+'</div>'+
       '<div class="si-foot"><span class="si-price">'+won(it.price)+' <span>코인</span></span>'+
-      '<button class="si-buy" data-buy="'+it.id+'">교환하기</button></div>';
+      '<button class="si-buy" data-buy="'+it.id+'">'+((shopCat==='sig')?'발동하기':'교환하기')+'</button></div>';
     box.appendChild(el);
   });
+  const note=$('#shopCatNote'); if(note) note.innerHTML=SHOP_CAT_NOTE[shopCat];
+  $$('#shopCatTabs .subtab').forEach(b=>{
+    const on=b.dataset.shopcat===shopCat;
+    b.classList.toggle('on',on);
+    b.setAttribute('aria-selected',on?'true':'false');
+  });
 }
+$('#shopCatTabs').addEventListener('click',e=>{
+  const b=e.target.closest('[data-shopcat]'); if(!b) return;
+  if(shopCat===b.dataset.shopcat) return;
+  shopCat=b.dataset.shopcat;
+  renderShopItems();
+});
+
+/* 오버레이 미리보기 */
+const OVERLAY_NICKS=['쌈8','부산황대표','햅삐히야','플디러버','씨나인6호'];
+let ovlTimer=null;
+function fireOverlay(it){
+  const box=$('#ovl'); if(!box) return;
+  const nick=OVERLAY_NICKS[Math.floor(Math.random()*OVERLAY_NICKS.length)];
+  $('#ovlNick').textContent=nick;
+  $('#ovlItem').textContent='['+it.name+']';
+  $('#ovlSub').textContent='실제 방송에서는 시청자 화면 위에 이렇게 떠요';
+  const em=$('#ovlEm'); em.textContent=it.emoji;
+  em.style.animation='none'; void em.offsetWidth; em.style.animation='';
+  box.classList.add('on');
+  if(ovlTimer) clearTimeout(ovlTimer);
+  ovlTimer=setTimeout(()=>box.classList.remove('on'),4600);
+}
+
+/* 디스코드·푸시 미리보기 */
+let pushTimer=null;
+function showPush(r){
+  const box=$('#push'); if(!box) return;
+  $('#pushBody').innerHTML='<b>'+esc(r.nick)+'</b>님이 <em>'+esc(r.itemName)+'</em>을(를) 신청했어요!'+
+    (r.memo?'<br><span class="memo">“'+esc(r.memo)+'”</span>':'');
+  const t=new Date();
+  $('#pushFoot').textContent='👑 희야랜드 관리자 탭에서 확인 · '+pad(t.getHours())+':'+pad(t.getMinutes());
+  box.classList.add('on');
+  if(pushTimer) clearTimeout(pushTimer);
+  pushTimer=setTimeout(()=>box.classList.remove('on'),6400);
+}
+$('#pushClose').addEventListener('click',()=>{ $('#push').classList.remove('on'); if(pushTimer) clearTimeout(pushTimer); });
+
+/* 역팬 신청 모달 */
+let exItem=null;
+function openExchange(it){
+  exItem=it;
+  $('#exEmoji').textContent=it.emoji;
+  $('#exTitle').textContent=it.name;
+  $('#exDesc').textContent=it.desc+'\n신청하면 희야 관리자 탭 대기열에 바로 쌓여요.';
+  $('#exPrice').textContent=won(it.price)+' 코인';
+  $('#exNick').value=(s.lastReqNick||'하이희야팬');
+  $('#exMemo').value='';
+  $('#exMemo').placeholder=it.hint||'요청 한마디 (선택)';
+  $('#exMemoCount').textContent='0 / 60';
+  $('#exBg').classList.add('on');
+  setTimeout(()=>{ try{ $('#exNick').focus(); $('#exNick').select(); }catch(e){} },80);
+}
+function closeExchange(){ $('#exBg').classList.remove('on'); exItem=null; }
+function submitExchange(quick){
+  if(!exItem) return;
+  const it=exItem;
+  const nick=(($('#exNick').value||'').trim()||'익명의 팬').slice(0,12);
+  const memo=(quick?'':($('#exMemo').value||'').trim()).slice(0,60);
+  if(s.coins<it.price){ closeExchange(); toast('코인이 부족해요! (필요 '+won(it.price)+' 코인)','🪙'); return; }
+  addCoins(-it.price,'상점 · '+it.name,{silent:true});
+  s.inventory[it.id]=(s.inventory[it.id]||0)+1;
+  s.lastReqNick=nick;
+  const req={id:'r'+Date.now().toString(36)+(Math.floor(Math.random()*90)+10),itemId:it.id,itemName:it.name,emoji:it.emoji,nick:nick,memo:memo,ts:Date.now(),status:'waiting'};
+  s.requests.unshift(req);
+  s.requests=s.requests.slice(0,40);
+  save();
+  closeExchange();
+  renderShopItems(); renderRequests(); renderInventory();
+  showPush(req);
+  toast('신청 완료! 👑 관리자 탭 대기열에 담았어요','💌');
+}
+$('#exSend').addEventListener('click',()=>submitExchange(false));
+$('#exQuick').addEventListener('click',()=>submitExchange(true));
+$('#exCancel').addEventListener('click',closeExchange);
+$('#exBg').addEventListener('click',e=>{ if(e.target===$('#exBg')) closeExchange(); });
+$('#exMemo').addEventListener('input',e=>{ $('#exMemoCount').textContent=e.target.value.length+' / 60'; });
+
+const INV_NAMES={};
+SHOP_SIG.concat(SHOP_FAN).forEach(x=>INV_NAMES[x.id]=x.name);
+INV_NAMES.gifticon='기프티콘 당첨권';
+INV_NAMES.sigpass='시그 1회 신청권';
+INV_NAMES.badge='응원 뱃지';
+const INV_EMOJI={banseol:'💌',soopnote:'📮',sigpass:'💃',coffee:'☕',photocard:'🖼️',badge:'🎀',spinticket:'🎡',gifticon:'🎟️',
+  sig_heart:'💗',sig_ppikki:'🕺',sig_zero:'🌀',sig_aegyo:'😘',sig_ending:'✨'};
+function renderInventory(){
+  const box=$('#invList'); if(!box) return;
+  const keys=Object.keys(s.inventory).filter(k=>s.inventory[k]>0);
+  const pend={}, doneC={};
+  (s.requests||[]).forEach(r=>{
+    if(r.status==='waiting') pend[r.itemId]=(pend[r.itemId]||0)+1;
+    else if(r.itemId) doneC[r.itemId]=(doneC[r.itemId]||0)+1;
+  });
+  $('#invCount').textContent=keys.length+'종';
+  if(!keys.length){ box.innerHTML='<span class="inv-empty">아직 교환한 아이템이 없어요. 상점에서 코인을 써 보세요!</span>'; return; }
+  box.innerHTML=keys.map(k=>{
+    let st='';
+    if(pend[k]) st='<em class="inv-st">처리 대기 '+pend[k]+'</em>';
+    else if(doneC[k]) st='<em class="inv-st ok">처리 완료</em>';
+    return '<span class="inv-chip">'+(INV_EMOJI[k]||'🎁')+' '+esc(INV_NAMES[k]||k)+' × '+s.inventory[k]+st+'</span>';
+  }).join('');
+}
+
+/* ---------- buy ---------- */
 $('#shopItems').addEventListener('click',e=>{
   const b=e.target.closest('[data-buy]'); if(!b) return;
-  const it=SHOP.find(x=>x.id===b.dataset.buy); if(!it) return;
+  const it=shopList().find(x=>x.id===b.dataset.buy); if(!it) return;
   if(s.coins<it.price){ toast('코인이 부족해요! (필요 '+won(it.price)+' 코인)','🪙'); return; }
+  if(it.req){ openExchange(it); return; }
   addCoins(-it.price,'상점 · '+it.name,{silent:true});
   s.inventory[it.id]=(s.inventory[it.id]||0)+1;
   if(it.id==='spinticket'){ s.freeSpins=(s.freeSpins||0)+3; }
   save();
-  renderInventory(); updateSpinUI();
-  toast(it.name+' · 보관함에 담았어요','🎁');
+  renderInventory(); renderShopItems(); updateSpinUI();
+  if(it.ovl){ fireOverlay(it); toast(it.name+' · 방송 화면 오버레이 미리보기','💃'); }
+  else{ toast(it.name+' · 룰렛 3회 충전 완료','🎡'); }
 });
-const INV_NAMES={};
-SHOP.forEach(x=>INV_NAMES[x.id]=x.name);
-INV_NAMES.gifticon='기프티콘 당첨권';
-const INV_EMOJI={banseol:'💌',sigpass:'💃',coffee:'☕',photocard:'🖼️',badge:'🎀',spinticket:'🎡',gifticon:'🎟️'};
-function renderInventory(){
-  const box=$('#invList'); const keys=Object.keys(s.inventory).filter(k=>s.inventory[k]>0);
-  $('#invCount').textContent=keys.length+'종';
-  if(!keys.length){ box.innerHTML='<span class="inv-empty">아직 교환한 아이템이 없어요. 상점에서 코인을 써 보세요!</span>'; return; }
-  box.innerHTML=keys.map(k=>'<span class="inv-chip">'+(INV_EMOJI[k]||'🎁')+' '+esc(INV_NAMES[k]||k)+' × '+s.inventory[k]+'</span>').join('');
-}
 
 /* ---------- stocks ---------- */
 const qtyState={};
@@ -1869,15 +2394,16 @@ function boot(){
   renderWallet();
   renderCheckin();
   renderQuests();
-  renderSigs(); renderSigMini(); renderPledges();
+  renderSigs(); renderSigMini();
   renderDice();
   renderDiceLog();
   buildLadder(); renderLadder();
   fruitStart();
   drawWheel();
-  renderShop(); renderInventory(); updateSpinUI();
+  renderShopItems(); renderInventory(); updateSpinUI();
   renderStocks();
   renderPosts();
+  renderPledges(); renderRequests();
   $('#spinCount').textContent=s.spinCount||0;
   const h=(location.hash||'').replace('#','');
   go(TABS.indexOf(h)>=0?h:'home');
