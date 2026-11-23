@@ -1735,8 +1735,10 @@ function stopTicks(){ if(tickTimer){ clearInterval(tickTimer); tickTimer=null; }
 $('#stockGrid').addEventListener('click',e=>{
   const b=e.target.closest('button[data-act]'); if(!b) return;
   const card=b.closest('.stock-card'); const sym=card.dataset.sym; const act=b.dataset.act;
-  if(act==='plus'){ qtyState[sym]=Math.min(999,(qtyState[sym]||1)+1); renderStocks(); }
-  else if(act==='minus'){ qtyState[sym]=Math.max(1,(qtyState[sym]||1)-1); renderStocks(); }
+  if(act==='plus'||act==='minus'){
+    qtyState[sym]= act==='plus' ? Math.min(999,(qtyState[sym]||1)+1) : Math.max(1,(qtyState[sym]||1)-1);
+    const sp=card.querySelector('.qty span'); if(sp) sp.textContent=qtyState[sym];
+  }
   else if(act==='buy'){ buyStock(sym,qtyState[sym]||1); }
   else if(act==='sell'){ sellStock(sym,qtyState[sym]||1); }
 });
