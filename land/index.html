@@ -1039,7 +1039,7 @@ img,svg{max-width:100%}
           <h2><span>📜</span>① 공약 관리</h2>
           <span class="chip mint" id="adminPledgeCount">공약 5개</span>
         </div>
-        <p class="adm-note">상태를 누르면 바로 <b>시그표·홈 공약현황</b>에 반영돼요. ✕를 두 번 누르면 삭제됩니다.</p>
+        <p class="adm-note">상태를 누르면 바로 <b>시그표·홈 공약현황</b>에 반영돼요. ✕를 누르면 ‘삭제?’로 바뀌고, 한 번 더 누르면 삭제됩니다.</p>
         <div class="adm-list" id="adminPledgeList"></div>
         <form class="adm-form" id="pledgeForm">
           <input id="plTitle" maxlength="40" placeholder="새 공약 제목 (예: 유튜브 구독자 1만)" autocomplete="off">
@@ -1225,6 +1225,7 @@ function loadState(){
     id:r.id||('r'+Math.random().toString(36).slice(2,8)),
     itemId:r.itemId||'', itemName:r.itemName, emoji:r.emoji||'💌',
     nick:r.nick||'익명의 팬', memo:r.memo||'', ts:r.ts||Date.now(),
+    mine:r.mine===true,
     status:r.status==='done'?'done':'waiting'
   }));
   if(typeof s.lastReqNick!=='string') s.lastReqNick='하이희야팬';
@@ -1328,7 +1329,7 @@ function go(tab){
   window.scrollTo({top:0,behavior:'smooth'});
   if(tab==='market'){ renderStocks(); startTicks(); } else stopTicks();
   if(tab==='shop'){ drawWheel(); updateSpinUI(); renderShopItems(); renderInventory(); }
-  if(tab==='admin'){ renderAdminPledges(); renderRequests(); }
+  if(tab==='admin'){ delArm=null; renderAdminPledges(); renderRequests(); }
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-tab]');
@@ -1529,7 +1530,7 @@ function renderHomePledges(){
 }
 
 /* ---------- admin ---------- */
-let delArm=null, delTimer=null;
+let delArm=null;
 const REQ_POOL=[
   {nick:'햅삐히야',itemName:'희야 포토카드',emoji:'🖼️',memo:'우리집 강아지랑 같이 찍은 컨셉으로 주세요 🐶'},
   {nick:'플디러버',itemName:'SOOP 쪽지 답장권',emoji:'📮',memo:'방송 끝나고 쪽지 확인 부탁드려요!'},
@@ -1592,13 +1593,11 @@ $('#adminPledgeList').addEventListener('click',e=>{
     const id=d.dataset.pldel;
     if(delArm!==id){
       delArm=id;
-      if(delTimer) clearTimeout(delTimer);
-      delTimer=setTimeout(()=>{ delArm=null; renderAdminPledges(); },3200);
       renderAdminPledges();
       return;
     }
     s.pledges=s.pledges.filter(p=>p.id!==id);
-    delArm=null; if(delTimer) clearTimeout(delTimer);
+    delArm=null;
     save(); renderPledges();
     toast('공약을 삭제했어요','🗑️');
     return;
@@ -1608,6 +1607,7 @@ $('#adminPledgeList').addEventListener('click',e=>{
     const p=s.pledges.find(x=>x.id===b.dataset.pl); if(!p) return;
     const st=b.dataset.st;
     if(p.st===st) return;
+    delArm=null;
     p.st=st; save(); renderPledges();
     toast('"'+p.t+'" → '+plLabel(st),'📜');
   }
@@ -2130,7 +2130,7 @@ function submitExchange(quick){
   addCoins(-it.price,'상점 · '+it.name,{silent:true});
   s.inventory[it.id]=(s.inventory[it.id]||0)+1;
   s.lastReqNick=nick;
-  const req={id:'r'+Date.now().toString(36)+(Math.floor(Math.random()*90)+10),itemId:it.id,itemName:it.name,emoji:it.emoji,nick:nick,memo:memo,ts:Date.now(),status:'waiting'};
+  const req={id:'r'+Date.now().toString(36)+(Math.floor(Math.random()*90)+10),itemId:it.id,itemName:it.name,emoji:it.emoji,nick:nick,memo:memo,ts:Date.now(),status:'waiting',mine:true};
   s.requests.unshift(req);
   s.requests=s.requests.slice(0,40);
   save();
@@ -2157,6 +2157,7 @@ function renderInventory(){
   const keys=Object.keys(s.inventory).filter(k=>s.inventory[k]>0);
   const pend={}, doneC={};
   (s.requests||[]).forEach(r=>{
+    if(!r.mine) return;
     if(r.status==='waiting') pend[r.itemId]=(pend[r.itemId]||0)+1;
     else if(r.itemId) doneC[r.itemId]=(doneC[r.itemId]||0)+1;
   });
