@@ -228,7 +228,9 @@ img,svg{max-width:100%}
 .pledge.soon .bar i{background:linear-gradient(90deg,#CDBBFF,#A88CF7)}
 
 /* ============ play ============ */
-.play-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.play-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.play-grid .game-card{display:flex;flex-direction:column}
+.play-grid .game-card:first-child .dice-stage{flex:1;min-height:124px}
 @media(max-width:900px){.play-grid{grid-template-columns:1fr}}
 .game-card{position:relative;overflow:hidden}
 .gc-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
@@ -262,8 +264,8 @@ img,svg{max-width:100%}
 .lane-hit:hover .lane-bg{fill:#FFF0F7}
 
 /* fruit */
-.fruit-wrap{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
-.fruit-side{flex:1 1 200px;min-width:180px}
+.fruit-wrap{display:flex;gap:34px;align-items:center;justify-content:center;flex-wrap:wrap}
+.fruit-side{flex:0 1 260px;min-width:220px;max-width:300px}
 .fruit-board-wrap{flex:0 0 auto;margin:0 auto}
 .fruit-board{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:linear-gradient(160deg,#FFF0F7,#F3F8FF);border:1px solid #FFE2EF;border-radius:20px;padding:9px;width:min(340px,86vw);touch-action:none;box-shadow:inset 0 2px 10px rgba(240,150,190,.08)}
 .fcell{position:relative;aspect-ratio:1;border-radius:13px;background:rgba(255,255,255,.72);display:grid;place-items:center;overflow:hidden}
@@ -281,7 +283,7 @@ img,svg{max-width:100%}
 .lv9{background:linear-gradient(160deg,#E5FBF2,#CCF5E4)}
 .lv10{background:linear-gradient(160deg,#FFEFF7,#FFD6EC)}
 .lv11{background:linear-gradient(160deg,#DDF6E6,#B9EBCF)}
-.score-row{display:flex;gap:8px;margin-bottom:10px}
+.score-row{display:flex;gap:8px;margin:0 auto 16px;max-width:620px}
 .score-pill{flex:1;background:#FFF7FB;border:1px solid #FBE4EF;border-radius:14px;padding:9px 12px;text-align:center}
 .score-pill small{display:block;font-size:10.5px;color:var(--sub);font-weight:700}
 .score-pill b{font-size:18px;color:#D65B90;letter-spacing:-.5px}
@@ -424,7 +426,10 @@ img,svg{max-width:100%}
   .sig-thumb .big{font-size:34px}
   .footer{padding:20px 14px 34px}
   .pf b{font-size:16px}
-  .fruit-wrap{gap:14px}
+  .fruit-wrap{gap:6px}
+  .fruit-side{order:2;width:100%;max-width:none;flex:1 1 100%}
+  .fruit-board-wrap{order:1}
+  .score-row{max-width:none}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001s!important;transition-duration:.001s!important}
@@ -509,15 +514,15 @@ img,svg{max-width:100%}
 
           <!-- balloons -->
           <g>
-            <path d="M632 150c0-14 9-24 20-24s20 10 20 24c0 12-9 20-20 25-11-5-20-13-20-25z" fill="#FFB3D1"/>
-            <path d="M652 176l-3 30" stroke="#FF9CC6" stroke-width="1.4"/>
+            <path d="M516 146c0-14 9-24 20-24s20 10 20 24c0 12-9 20-20 25-11-5-20-13-20-25z" fill="#FFB3D1"/>
+            <path d="M536 172l-3 30" stroke="#FF9CC6" stroke-width="1.4"/>
             <path d="M1088 140c0-11 7-19 16-19s16 8 16 19c0 9-7 16-16 20-9-4-16-11-16-20z" fill="#9BD8FF"/>
             <path d="M1104 161l-2 26" stroke="#7CC0F2" stroke-width="1.3"/>
             <path d="M760 120c0-9 6-16 13-16s13 7 13 16c0 8-6 13-13 16-7-3-13-8-13-16z" fill="#D8C8FF" opacity=".95"/>
           </g>
 
           <!-- ferris wheel -->
-          <g transform="translate(196,262)">
+          <g transform="translate(690,266) scale(.9)">
             <g stroke="#FFC2DC" stroke-width="3">
               <path d="M0 0L-62 112M0 0L62 112"/>
             </g>
@@ -642,6 +647,18 @@ img,svg{max-width:100%}
           </div>
           <div class="sig-mini" id="sigMini"></div>
         </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2><span>🎈</span>희야랜드 준비 중</h2>
+            <span class="chip soft">로드맵</span>
+          </div>
+          <ul class="hl-list">
+            <li><span class="hl-ico">✅</span><div><b>지금 체험판</b><small>디자인·미니게임·코인·룰렛 미리보기</small></div></li>
+            <li><span class="hl-ico">⏳</span><div><b>다음 단계</b><small>팬 로그인·포인트·게시판 서버 연결</small></div></li>
+            <li><span class="hl-ico">💌</span><div><b>정희님 피드백</b><small>마음에 드는 부분을 알려주면 계속 다듬을게요</small></div></li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -743,12 +760,12 @@ img,svg{max-width:100%}
         <span class="chip mint">최고 <b id="fruitBest">0</b>점</span>
       </div>
       <p class="gc-desc">같은 과일을 합쳐 점점 큰 과일로! 🍉 수박을 완성하면 +300 코인 보너스. (스와이프·방향키·아래 버튼)</p>
+      <div class="score-row">
+        <div class="score-pill"><small>지금 점수</small><b id="fruitScore">0</b></div>
+        <div class="score-pill"><small>내 최고</small><b id="fruitBest2">0</b></div>
+      </div>
       <div class="fruit-wrap">
         <div class="fruit-side">
-          <div class="score-row">
-            <div class="score-pill"><small>지금 점수</small><b id="fruitScore">0</b></div>
-            <div class="score-pill"><small>내 최고</small><b id="fruitBest2">0</b></div>
-          </div>
           <div class="dpad">
             <button class="up" data-dir="up" aria-label="위">▲</button>
             <button class="left" data-dir="left" aria-label="왼쪽">◀</button>
@@ -900,7 +917,7 @@ const QUESTS=[
 
 function freshState(){
   const s={
-    coins:1500, earned:0, spent:0,
+    coins:1500, earned:0, spent:0, freeSpins:0,
     checked:null, streak:0,
     questDate:todayKey(), quests:{checkin:0,minigame:0,roulette:0,post:0}, claimed:{},
     history:[], inventory:{}, posts:[], likes:{}, spinCount:0,
@@ -957,6 +974,7 @@ function addCoins(n,label,opts){
   if(label) s.history.unshift({t:Date.now(),label,delta:n});
   s.history=s.history.slice(0,40);
   save(); renderWallet();
+  if(current==='market') renderStocks();
   const w=$('#wallet');
   w.classList.remove('bump'); void w.offsetWidth; w.classList.add('bump');
   const f=document.createElement('span');
@@ -1006,8 +1024,8 @@ function go(tab){
   $$('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));
   if(location.hash!=='#'+tab){ try{ history.replaceState(null,'','#'+tab); }catch(e){ location.hash=tab; } }
   window.scrollTo({top:0,behavior:'smooth'});
-  if(tab==='market') startTicks(); else stopTicks();
-  if(tab==='shop') drawWheel();
+  if(tab==='market'){ renderStocks(); startTicks(); } else stopTicks();
+  if(tab==='shop'){ drawWheel(); updateSpinUI(); }
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-tab]');
@@ -1256,13 +1274,11 @@ function ladderY(i){ return LTOP + (i+1)*((LBOT-LTOP)/(LAD.rows+1)); }
 function buildLadder(){
   LAD.rungs=[];
   for(let r=0;r<LAD.rows;r++){
-    const row=[]; const used={};
-    const order=Math.random()<.5?[0,1]:[1,0];
-    order.forEach(c=>{
-      if(c>=LAD.cols-1) return;
-      if(used[c]||used[c+1]) return;
-      if(Math.random()<0.62){ row.push([c,c+1]); used[c]=true; used[c+1]=true; }
-    });
+    const row=[];
+    if(Math.random()<0.88){
+      const start=Math.random()<0.5?0:1;
+      row.push([start,start+1]);
+    }
     LAD.rungs.push(row);
   }
   LAD.mult=[0,1.4,2.6].sort(()=>Math.random()-0.5);
@@ -1496,12 +1512,11 @@ function drawWheel(){
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,a0,a1); ctx.closePath();
     ctx.fillStyle=WHEEL_COLORS[i%WHEEL_COLORS.length]; ctx.fill();
     ctx.lineWidth=5; ctx.strokeStyle='#FFFFFF'; ctx.stroke();
-    ctx.save(); ctx.translate(cx,cy); ctx.rotate(a0+step/2);
-    ctx.textAlign='right'; ctx.textBaseline='middle';
+    const mid=a0+step/2;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillStyle='#8A6377';
-    ctx.font=(PRIZES[i].l==='기프티콘권')?'800 22px Pretendard, sans-serif':'900 30px Pretendard, sans-serif';
-    ctx.fillText(PRIZES[i].l, R-26, 1);
-    ctx.restore();
+    ctx.font=(PRIZES[i].l==='기프티콘권')?'800 21px Pretendard, sans-serif':'900 29px Pretendard, sans-serif';
+    ctx.fillText(PRIZES[i].l, cx+Math.cos(mid)*R*0.64, cy+Math.sin(mid)*R*0.64);
   }
   ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.lineWidth=10; ctx.strokeStyle='#FFFFFF'; ctx.stroke();
   for(let i=0;i<n;i++){
@@ -1512,12 +1527,20 @@ function drawWheel(){
     ctx.strokeStyle='#FFC2DC'; ctx.lineWidth=4; ctx.stroke();
   }
 }
+function updateSpinUI(){
+  const b=$('#spinBtn'); if(!b) return;
+  if(spinning){ b.textContent='룰렛 도는 중... 🎡'; return; }
+  const free=s.freeSpins||0;
+  b.textContent=free>0?('🎡 무료 룰렛 돌리기 ('+free+'회 남음)'):'🎡 룰렛 돌리기 (50 코인)';
+}
 function spin(){
   if(spinning) return;
-  if(s.coins<50){ toast('코인이 부족해요! (50 코인 필요)','🪙'); return; }
+  const free=(s.freeSpins||0)>0;
+  if(!free && s.coins<50){ toast('코인이 부족해요! (50 코인 필요)','🪙'); return; }
   spinning=true;
   const btn=$('#spinBtn'); btn.disabled=true; btn.textContent='룰렛 도는 중... 🎡';
-  addCoins(-50,'행운 룰렛 참여',{silent:true});
+  if(free){ s.freeSpins--; }
+  else { addCoins(-50,'행운 룰렛 참여',{silent:true}); }
   s.spinCount=(s.spinCount||0)+1; save();
   const n=PRIZES.length, step=360/n;
   const idx=Math.floor(Math.random()*n);
@@ -1529,7 +1552,7 @@ function spin(){
   $('#wheel').style.transform='rotate('+wheelRot+'deg)';
   setTimeout(()=>{
     const p=PRIZES[idx];
-    spinning=false; btn.disabled=false; btn.textContent='🎡 룰렛 돌리기 (50 코인)';
+    spinning=false; btn.disabled=false; updateSpinUI();
     $('#spinCount').textContent=s.spinCount||0;
     progressQuest('roulette');
     if(p.t==='coin'){
@@ -1571,9 +1594,11 @@ $('#shopItems').addEventListener('click',e=>{
   const it=SHOP.find(x=>x.id===b.dataset.buy); if(!it) return;
   if(s.coins<it.price){ toast('코인이 부족해요! (필요 '+won(it.price)+' 코인)','🪙'); return; }
   addCoins(-it.price,'상점 · '+it.name,{silent:true});
-  s.inventory[it.id]=(s.inventory[it.id]||0)+1; save();
-  renderInventory();
-  toast('🎁 '+it.name+'을(를) 보관함에 담았어요','🎁');
+  s.inventory[it.id]=(s.inventory[it.id]||0)+1;
+  if(it.id==='spinticket'){ s.freeSpins=(s.freeSpins||0)+3; }
+  save();
+  renderInventory(); updateSpinUI();
+  toast(it.name+' · 보관함에 담았어요','🎁');
 });
 const INV_NAMES={};
 SHOP.forEach(x=>INV_NAMES[x.id]=x.name);
@@ -1771,7 +1796,7 @@ function boot(){
   buildLadder(); renderLadder();
   fruitStart();
   drawWheel();
-  renderShop(); renderInventory();
+  renderShop(); renderInventory(); updateSpinUI();
   renderStocks();
   renderPosts();
   $('#spinCount').textContent=s.spinCount||0;
