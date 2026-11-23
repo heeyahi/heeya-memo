@@ -232,9 +232,7 @@ img,svg{max-width:100%}
 .pledge.soon .bar i{background:linear-gradient(90deg,#CDBBFF,#A88CF7)}
 
 /* ============ play ============ */
-.play-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
-.play-grid .game-card{display:flex;flex-direction:column}
-.play-grid .game-card:first-child .dice-stage{flex:1;min-height:124px}
+.play-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 @media(max-width:900px){.play-grid{grid-template-columns:1fr}}
 .game-card{position:relative;overflow:hidden}
 .gc-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
@@ -260,6 +258,12 @@ img,svg{max-width:100%}
 .result-box.lose{background:#F7F9FF;border-color:#E2E9F8;color:#7A87A8}
 .bet-note{display:flex;justify-content:space-between;font-size:11.5px;color:var(--sub);margin-top:8px}
 .bet-note b{color:var(--pink-deep)}
+.rec-box{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+.rec-box>b{font-size:11px;color:var(--sub);font-weight:800;letter-spacing:.2px}
+.rec-list{display:flex;flex-direction:column;gap:5px;margin-top:6px}
+.rec-item{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;font-weight:700;color:var(--ink-2)}
+.rec-item .plus{color:var(--up)}
+.rec-item .minus{color:var(--down)}
 
 /* ladder */
 .ladder-svg{width:100%;height:auto;display:block;max-width:360px;margin:0 auto}
@@ -751,6 +755,7 @@ img,svg{max-width:100%}
         <button class="btn btn-primary btn-block" id="diceRoll">🎲 주사위 던지기</button>
         <div class="result-box" id="diceResult">홀/짝을 고르고 주사위를 던져보세요!</div>
         <div class="bet-note"><span>건 코인 <b id="diceBetLabel">100</b></span><span>맞히면 <b id="diceWinLabel">190</b> 코인 회수</span></div>
+        <div class="rec-box"><b>최근 기록</b><div class="rec-list" id="diceLog"></div></div>
       </div>
 
       <!-- ladder -->
@@ -935,7 +940,7 @@ const QUESTS=[
 function freshState(){
   const s={
     coins:1500, earned:0, spent:0, freeSpins:0,
-    checked:null, streak:0,
+    checked:null, streak:0, diceLog:[],
     questDate:todayKey(), quests:{checkin:0,minigame:0,roulette:0,post:0}, claimed:{},
     history:[], inventory:{}, posts:[], likes:{}, spinCount:0,
     fruitBest:0, stocks:{}, holdings:{}, sigLikes:{}
@@ -1235,6 +1240,12 @@ function renderDice(){
   $('#diceBetLabel').textContent=won(dice.bet);
   $('#diceWinLabel').textContent=won(Math.round(dice.bet*1.9));
 }
+function renderDiceLog(){
+  const box=$('#diceLog'); if(!box) return;
+  const log=s.diceLog||[];
+  if(!log.length){ box.innerHTML='<span class="muted">아직 기록이 없어요</span>'; return; }
+  box.innerHTML=log.map(x=>'<div class="rec-item"><span>'+esc(x.t)+'</span><b class="'+(x.d>=0?'plus':'minus')+'">'+(x.d>0?'+':'')+won(x.d)+'</b></div>').join('');
+}
 $('#diceBets').addEventListener('click',e=>{
   const b=e.target.closest('[data-bet]'); if(!b||dice.rolling) return;
   dice.bet=Number(b.dataset.bet);
@@ -1280,6 +1291,8 @@ $('#diceRoll').addEventListener('click',()=>{
       res.textContent='😢 '+sum+' = '+(isOdd?'홀':'짝')+'... 아쉬워요! -'+won(dice.bet)+' 코인';
     }
     dice.rolling=false; btn.disabled=false; btn.textContent='🎲 주사위 던지기';
+    (s.diceLog=s.diceLog||[]).unshift({t:(isOdd?'홀':'짝')+' '+sum,d:win?(Math.round(dice.bet*1.9)-dice.bet):-dice.bet});
+    s.diceLog=s.diceLog.slice(0,4); save(); renderDiceLog();
     progressQuest('minigame');
   },1000);
 });
@@ -1838,6 +1851,7 @@ function boot(){
   renderQuests();
   renderSigs(); renderSigMini(); renderPledges();
   renderDice();
+  renderDiceLog();
   buildLadder(); renderLadder();
   fruitStart();
   drawWheel();
