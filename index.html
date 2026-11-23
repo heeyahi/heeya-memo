@@ -234,6 +234,23 @@ html[data-theme="dark"] .tagpill{color:var(--accent-deep)}
 .tips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:16px}
 .tips span{font-size:11.5px;color:var(--sub);border:1px dashed var(--line-2);border-radius:999px;padding:4px 10px}
 
+/* 링크 모아보기 */
+.lgrid{display:flex;flex-direction:column;gap:8px}
+.lrow{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  background:var(--surface);border:1px solid var(--line);border-radius:15px;
+  padding:10px 12px;box-shadow:var(--shadow-sm);transition:transform .14s;
+}
+.lrow:active{transform:scale(.985)}
+.lrow .l-badge{width:38px;height:38px;border-radius:11px;font-size:17px}
+.lrow.has-thumb .l-badge{display:none}
+.lrow .l-img{flex:0 0 auto;width:64px;height:40px;border-radius:9px;object-fit:cover}
+.lrow .l-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.lrow .l-title{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .l-sub{font-size:10.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .l-date{flex:0 0 auto;font-size:10px;color:var(--sub);text-align:center;line-height:1.35}
+.lrow .l-date b{display:block;font-size:13px;color:var(--ink-2)}
+
 /* ---------- 입력창 ---------- */
 .composer{
   position:relative;z-index:3;flex:0 0 auto;
@@ -261,6 +278,17 @@ html[data-theme="dark"] .tagpanel input{background:rgba(34,28,22,.8)}
 .tagpanel input:focus{border-color:var(--accent);background:var(--surface)}
 .attachrow{display:flex;gap:7px;overflow-x:auto;padding:0 2px 8px;scrollbar-width:none}
 .attachrow::-webkit-scrollbar{display:none}
+.linkhint{
+  display:flex;align-items:center;gap:6px;width:100%;text-align:left;
+  margin:0 0 7px;padding:8px 12px;border-radius:12px;
+  font-size:12px;font-weight:700;letter-spacing:-.01em;color:var(--accent-deep);
+  background:var(--accent-soft);border:1px dashed rgba(176,114,63,.4);
+  animation:fade .25s ease;
+}
+html[data-theme="dark"] .linkhint{color:var(--accent)}
+.linkhint:active{transform:scale(.985)}
+.linkhint .lh-main{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.linkhint .lh-x{color:var(--sub);font-size:12px;padding:2px 2px 2px 8px}
 .thumb{position:relative;flex:0 0 auto;width:58px;height:58px;border-radius:12px;overflow:hidden;border:1px solid var(--line-2);box-shadow:var(--shadow-sm)}
 .thumb img{width:100%;height:100%;object-fit:cover}
 .thumb .rm{
@@ -399,6 +427,30 @@ html[data-theme="dark"] .day.has{background:rgba(216,154,100,.10)}
 .photogrid button{position:relative;aspect-ratio:1/1;border-radius:11px;overflow:hidden;background:var(--surface-2)}
 .photogrid img{width:100%;height:100%;object-fit:cover}
 .photogrid .pd{position:absolute;left:0;right:0;bottom:0;font-size:9px;color:#fff;padding:8px 5px 3px;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);text-align:left}
+
+/* ---------- 링크 카드 ---------- */
+.lcard{
+  display:flex;align-items:center;gap:9px;margin-top:8px;padding:9px 10px;
+  background:var(--surface-2);border:1px solid var(--line-2);border-radius:13px;
+  text-decoration:none;color:inherit;min-width:0;transition:transform .13s,background .15s;
+}
+.lcard:active{transform:scale(.98);background:var(--accent-soft)}
+.l-badge{
+  flex:0 0 auto;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  font-size:15px;background:var(--accent-soft);border:1px solid var(--line);
+}
+.l-badge.yt{background:#28160E;color:#FFD9A8;font-size:12px;font-weight:800;letter-spacing:-.02em}
+html[data-theme="dark"] .l-badge.yt{background:#3A2314;color:#FFD9A8}
+.l-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.l-title{font-size:12.5px;font-weight:700;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.l-sub{font-size:10.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.l-open{flex:0 0 auto;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:var(--accent);background:var(--accent-soft);font-size:13px}
+.lcard.has-thumb{flex-direction:column;align-items:stretch;gap:0;padding:0;overflow:hidden}
+.lcard.has-thumb .l-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--surface-2)}
+.lcard.has-thumb .l-meta{display:flex;align-items:center;gap:7px;padding:7px 9px 8px}
+.lcard.has-thumb .l-main{min-width:0}
+.lcard.has-thumb .l-badge{width:auto;height:20px;border-radius:6px;padding:0 6px;font-size:10px}
+.lcard.has-thumb .l-open{width:24px;height:24px;margin-left:auto}
 
 /* ---------- 모달/시트 ---------- */
 .m-backdrop{
@@ -564,6 +616,7 @@ html[data-theme="dark"] .toast button{color:#8C5228}
           <input id="inTags" type="text" placeholder="#태그 #태그 (선택)" maxlength="120">
         </div>
         <div class="attachrow" id="attachRow" hidden></div>
+        <button class="linkhint" id="linkHint" hidden></button>
         <div class="ctarget" id="cTarget"></div>
         <div class="crow">
           <button class="cbtn" id="btnPhoto" aria-label="사진 첨부">
@@ -763,7 +816,7 @@ var ui = {
   tab:'memo',
   folder:'all',
   cal:{ y:0, m:0, selected:null, scope:'all' },
-  search:{ q:'', tag:null, photos:false, folder:'all' },
+  search:{ q:'', tag:null, photos:false, links:false, folder:'all' },
   editing:null,
   pendingImages: []
 };
@@ -1139,6 +1192,132 @@ function deleteFolder(id){
 }
 
 /* ============================================================
+   4b. 링크 자동 정리
+============================================================ */
+var LINK_CATS=[
+  {tag:'유튜브',folder:'방송·방셀',hosts:['youtube.com','youtu.be']},
+  {tag:'방송국',folder:'방송·방셀',hosts:['playdk.kr','sooplive.co.kr','vod.sooplive.co.kr']},
+  {tag:'인스타',hosts:['instagram.com','instagr.am']},
+  {tag:'스레드',hosts:['threads.net','threads.com']},
+  {tag:'X',hosts:['x.com','twitter.com','t.co']},
+  {tag:'쇼핑',folder:'위시·쇼핑',hosts:['coupang.com','smartstore.naver.com','musinsa.com','zigzag.kr','kream.co.kr','29cm.co.kr','gmarket.co.kr','11st.co.kr','ssg.com','wemakeprice.com','tmon.co.kr','brandi.co.kr','abcmart.co.kr','aladin.co.kr','kyobobook.co.kr','yes24.com','oliveyoung.co.kr','kakaocommerce.com','gift.kakao.com']},
+  {tag:'맛집지도',hosts:['map.naver.com','m.map.naver.com','place.map.kakao.com','kko.kakao.com','diningcode.com','mangoplate.com','catchtable.net','siksinhot.com']},
+  {tag:'뉴스블로그',hosts:['blog.naver.com','m.blog.naver.com','tistory.com','velog.io','brunch.co.kr','news.naver.com','n.news.naver.com','chosun.com','hankyung.com','etnews.com','ytn.co.kr','sbs.co.kr','imbc.com','kbs.co.kr']}
+];
+var LK_KEY='heeya-memo.lk';
+var lkCache=(function(){
+  try{ return JSON.parse(localStorage.getItem(LK_KEY)||'{}') }catch(e){ return {} }
+})();
+function lkSave(){
+  try{
+    var ks=Object.keys(lkCache);
+    if(ks.length>300){ ks.slice(0,ks.length-300).forEach(function(k){ delete lkCache[k] }) }
+    localStorage.setItem(LK_KEY,JSON.stringify(lkCache));
+  }catch(e){}
+}
+function hostOf(u){
+  try{ return new URL(u).hostname.toLowerCase().replace(/^www\./,'') }catch(e){ return '' }
+}
+function hostMatches(host,h){
+  return host===h || host.endsWith('.'+h) || host.indexOf(h+'/')>=0 || host.indexOf(h+':')>=0;
+}
+function linkCat(l){
+  var host=l.host||hostOf(l.url), url=l.url||'';
+  if(url.indexOf('google.')>=0 && url.indexOf('/maps')>=0) return {tag:'맛집지도'};
+  for(var i=0;i<LINK_CATS.length;i++){
+    var hs=LINK_CATS[i].hosts;
+    for(var j=0;j<hs.length;j++){
+      if(hostMatches(host,hs[j])){
+        var c={tag:LINK_CATS[i].tag};
+        if(LINK_CATS[i].folder) c.folder=LINK_CATS[i].folder;
+        return c;
+      }
+    }
+  }
+  if(host.indexOf('news.')===0) return {tag:'뉴스블로그'};
+  return {tag:'링크'};
+}
+function parseLinks(text){
+  if(!text) return [];
+  var re=/https?:\/\/[^\s<>"'\u3130-\u318F\uAC00-\uD7A3]+/g;
+  var out=[], seen={};
+  String(text).replace(re,function(m){
+    m=m.replace(/[)\]}.,;!?"'\u2026]+$/,'');
+    if(m.length>10 && !seen[m]){ seen[m]=1; out.push({url:m,host:hostOf(m)}) }
+    return m;
+  });
+  return out.slice(0,4);
+}
+function ytInfo(url){
+  var m=url.match(/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);
+  return m ? {id:m[1]} : null;
+}
+function badgeFor(tag){
+  return {유튜브:'▶',인스타:'◎',스레드:'@',X:'𝕏',쇼핑:'🛍',맛집지도:'📍',뉴스블로그:'📰',방송국:'📺',링크:'🔗'}[tag]||'🔗';
+}
+function linkTagsOf(links){
+  var tags=[];
+  links.forEach(function(l){
+    var t=linkCat(l).tag;
+    if(tags.indexOf(t)<0) tags.push(t);
+  });
+  return tags;
+}
+function loadYTTitle(l,titleEl,subEl){
+  var key=l.url;
+  function apply(d){
+    if(titleEl && d.title) titleEl.textContent=d.title.length>64?d.title.slice(0,64)+'…':d.title;
+    if(subEl){
+      var s=(d.author_name||'')+' · 유튜브';
+      if(s.length>2) subEl.textContent=s;
+    }
+  }
+  if(lkCache[key]) return apply(lkCache[key]);
+  var ctrl=new AbortController();
+  var to=setTimeout(function(){ ctrl.abort() },4500);
+  fetch('https://noembed.com/embed?url='+encodeURIComponent(l.url),{signal:ctrl.signal})
+    .then(function(r){ return r.ok ? r.json() : null })
+    .then(function(d){
+      clearTimeout(to);
+      if(!d || !d.title) return;
+      lkCache[key]={title:d.title||'',author_name:d.author_name||''};
+      lkSave(); apply(lkCache[key]);
+    })
+    .catch(function(){ clearTimeout(to) });
+}
+function linkCardEl(l){
+  var cat=linkCat(l), yt=ytInfo(l.url);
+  var a=document.createElement('a');
+  a.className='lcard'+(yt?' has-thumb':'');
+  a.href=l.url; a.target='_blank'; a.rel='noopener noreferrer';
+  if(yt){
+    var img=document.createElement('img');
+    img.className='l-img'; img.loading='lazy'; img.alt='유튜브 썸네일';
+    img.src='https://i.ytimg.com/vi/'+yt.id+'/mqdefault.jpg';
+    a.appendChild(img);
+    var meta=document.createElement('span'); meta.className='l-meta';
+    var bd=document.createElement('span'); bd.className='l-badge yt'; bd.textContent='▶';
+    var main=document.createElement('span'); main.className='l-main';
+    var ti=document.createElement('span'); ti.className='l-title'; ti.textContent='유튜브 영상';
+    var sub=document.createElement('span'); sub.className='l-sub'; sub.textContent=l.host;
+    main.appendChild(ti); main.appendChild(sub);
+    var op=document.createElement('span'); op.className='l-open'; op.textContent='↗';
+    meta.appendChild(bd); meta.appendChild(main); meta.appendChild(op);
+    a.appendChild(meta);
+    loadYTTitle(l,ti,sub);
+  } else {
+    var bd2=document.createElement('span'); bd2.className='l-badge'; bd2.textContent=badgeFor(cat.tag);
+    var main2=document.createElement('span'); main2.className='l-main';
+    var ti2=document.createElement('span'); ti2.className='l-title'; ti2.textContent=cat.tag+' 링크';
+    var sub2=document.createElement('span'); sub2.className='l-sub'; sub2.textContent=l.host;
+    var op2=document.createElement('span'); op2.className='l-open'; op2.textContent='↗';
+    main2.appendChild(ti2); main2.appendChild(sub2);
+    a.appendChild(bd2); a.appendChild(main2); a.appendChild(op2);
+  }
+  return a;
+}
+
+/* ============================================================
    5. 메모방
 ============================================================ */
 function renderChat(){
@@ -1194,7 +1373,7 @@ function emptyState(){
   wrap.appendChild(cta);
   var tips=document.createElement('div');
   tips.className='tips';
-  ['✨ 제목·태그','🖼 사진','📁 폴더별 정리','📅 캘린더'].forEach(function(t){
+  ['✨ 제목·태그','🔗 링크 정리','🖼 사진','📁 폴더별 정리','📅 캘린더'].forEach(function(t){
     var s=document.createElement('span'); s.textContent=t; tips.appendChild(s);
   });
   wrap.appendChild(tips);
@@ -1253,6 +1432,10 @@ function bubbleEl(n){
     var tx=document.createElement('div'); tx.className='b-text'; tx.textContent=n.text;
     b.appendChild(tx);
   }
+  var noteLinks=parseLinks(n.text);
+  noteLinks.forEach(function(l){
+    b.appendChild(linkCardEl(l));
+  });
   if(n.tags && n.tags.length){
     var tg=document.createElement('div'); tg.className='b-tags';
     n.tags.forEach(function(t){
@@ -1280,12 +1463,13 @@ function bubbleEl(n){
   var pressTimer=null, longFired=false;
   b.addEventListener('click',function(e){
     if(e.target.closest('button')) return;
+    if(e.target.closest('a')) return;
     if(e.target.tagName==='IMG') return;
     if(longFired){ longFired=false; return; }
     openNoteSheet(n.id);
   });
   b.addEventListener('pointerdown',function(e){
-    if(e.target.closest('button')||e.target.tagName==='IMG') return;
+    if(e.target.closest('button')||e.target.closest('a')||e.target.tagName==='IMG') return;
     longFired=false;
     pressTimer=setTimeout(function(){
       pressTimer=null; longFired=true;
@@ -1539,6 +1723,38 @@ function updateSendState(){
   var on = !!t || ui.pendingImages.length>0 || $('#inTitle').value.trim().length>0;
   $('#btnSend').classList.toggle('on',on);
   $('#btnSend').disabled=!on;
+  updateLinkHint();
+}
+var linkHintData=null;
+function updateLinkHint(){
+  var el=$('#linkHint');
+  var links=parseLinks($('#inText').value);
+  if(!links.length){ linkHintData=null; el.hidden=true; return; }
+  var cats=links.map(function(l){return linkCat(l)});
+  var tags=[];
+  cats.forEach(function(c){ if(tags.indexOf(c.tag)<0) tags.push(c.tag) });
+  var folder=null;
+  cats.forEach(function(c){ if(!folder && c.folder) folder=c.folder });
+  linkHintData={tags:tags,folder:folder,links:links};
+  var label='🔗 링크 감지! 자동으로 '+tags.map(function(t){return '#'+t}).join(' ')+' 붙여요';
+  if(folder && ui.folder==='all') label+=' · 누르면 📁 '+folder+'에 저장';
+  else label+=' · 누르면 미리 보기';
+  el.textContent=label;
+  el.hidden=false;
+}
+function applyLinkHint(){
+  if(!linkHintData) return;
+  var cur=parseTags($('#inTags').value);
+  linkHintData.tags.forEach(function(t){ if(cur.indexOf(t)<0) cur.push(t) });
+  $('#inTags').value=cur.map(function(t){return '#'+t}).join(' ');
+  var moved=null;
+  if(linkHintData.folder && ui.folder==='all'){
+    var f=state.folders.filter(function(x){return x.name===linkHintData.folder})[0];
+    if(f){ setFolder(f.id); moved=f; }
+  }
+  toast(moved
+    ? ('#'+linkHintData.tags.join(' #')+' · '+moved.icon+' '+moved.name+'에 저장돼요')
+    : ('#'+linkHintData.tags.join(' #')+' 태그를 붙였어요'), {icon:'🔗'});
 }
 function renderAttachRow(){
   var row=$('#attachRow');
@@ -1560,6 +1776,10 @@ function sendMemo(){
   var tags=parseTags($('#inTags').value);
   var imgs=ui.pendingImages.slice();
   if(!text && !title && !imgs.length) return;
+  var links=parseLinks(text);
+  if(links.length){
+    linkTagsOf(links).forEach(function(t){ if(tags.indexOf(t)<0) tags.push(t) });
+  }
   var fid = (ui.folder==='all') ? defaultFolderId() : ui.folder;
   if(!folderById(fid)) fid=defaultFolderId();
   var note={id:uid('n_'),folderId:fid,title:title,text:text,tags:tags,images:imgs,
@@ -1703,12 +1923,16 @@ function renderSearchFilters(){
   box.appendChild(lab2);
   var row2=document.createElement('div'); row2.className='f-row';
   var all=document.createElement('button');
-  all.className='chip'+(ui.search.photos?'':' on'); all.textContent='📋 목록';
-  all.addEventListener('click',function(){ ui.search.photos=false; renderSearch(); });
+  all.className='chip'+(!ui.search.photos && !ui.search.links?'':' off');
+  all.textContent='📋 목록';
+  all.addEventListener('click',function(){ ui.search.photos=false; ui.search.links=false; renderSearch(); });
   var ph=document.createElement('button');
   ph.className='chip'+(ui.search.photos?' on':''); ph.textContent='🖼 사진만';
-  ph.addEventListener('click',function(){ ui.search.photos=true; renderSearch(); });
-  row2.appendChild(all); row2.appendChild(ph);
+  ph.addEventListener('click',function(){ ui.search.photos=true; ui.search.links=false; renderSearch(); });
+  var lk=document.createElement('button');
+  lk.className='chip'+(ui.search.links?' on':''); lk.textContent='🔗 링크만';
+  lk.addEventListener('click',function(){ ui.search.links=true; ui.search.photos=false; renderSearch(); });
+  row2.appendChild(all); row2.appendChild(ph); row2.appendChild(lk);
   box.appendChild(row2);
 
   /* 태그 */
@@ -1741,6 +1965,7 @@ function searchMatches(){
     if(ui.search.folder!=='all' && n.folderId!==ui.search.folder) return false;
     if(ui.search.tag && (n.tags||[]).indexOf(ui.search.tag)<0) return false;
     if(ui.search.photos && (!n.images||!n.images.length)) return false;
+    if(ui.search.links && !parseLinks(n.text).length) return false;
     if(!q) return true;
     var hay=((n.title||'')+' '+(n.text||'')+' '+(n.tags||[]).join(' ')).toLowerCase();
     return hay.indexOf(q)>=0;
@@ -1755,7 +1980,7 @@ function renderSearchResults(){
 
   var head=document.createElement('div'); head.className='res-head';
   var left=document.createElement('span');
-  var label = ui.search.photos ? '사진' : '메모';
+  var label = ui.search.photos ? '사진' : (ui.search.links ? '링크' : '메모');
   left.textContent = (q?'검색 결과 · ':'')+label+' '+list.length+'개';
   head.appendChild(left);
   if(ui.search.tag || q){
@@ -1775,6 +2000,53 @@ function renderSearchResults(){
     var e=document.createElement('div'); e.className='empty'; e.style.paddingTop='40px';
     e.innerHTML='<div class="e-emoji">🔍</div><h2>찾는 메모가 없어요</h2><p>다른 단어나 태그로 찾아보세요.</p>';
     box.appendChild(e);
+    return;
+  }
+
+  if(ui.search.links){
+    var lgrid=document.createElement('div'); lgrid.className='lgrid';
+    var lCount=0;
+    list.forEach(function(n){
+      var ls=parseLinks(n.text);
+      if(!ls.length) return;
+      lCount++;
+      ls.forEach(function(l){
+        var cat=linkCat(l), yt=ytInfo(l.url);
+        var row=document.createElement('button');
+        row.className='lrow'+(yt?' has-thumb':'');
+        if(yt){
+          var img=document.createElement('img');
+          img.className='l-img'; img.loading='lazy'; img.alt='';
+          img.src='https://i.ytimg.com/vi/'+yt.id+'/mqdefault.jpg';
+          row.appendChild(img);
+        } else {
+          var bd=document.createElement('span'); bd.className='l-badge'; bd.textContent=badgeFor(cat.tag);
+          row.appendChild(bd);
+        }
+        var body=document.createElement('span'); body.className='l-body';
+        var ti=document.createElement('span'); ti.className='l-title';
+        ti.textContent=(cat.tag==='유튜브'&&lkCache[l.url]&&lkCache[l.url].title)
+          ? lkCache[l.url].title : (cat.tag+' · '+l.host);
+        var sub=document.createElement('span'); sub.className='l-sub';
+        sub.textContent=(n.title?n.title+' — ':'')+l.url.replace(/^https?:\/\//,'').slice(0,46);
+        body.appendChild(ti); body.appendChild(sub);
+        var dd=new Date(n.createdAt);
+        var dt=document.createElement('span'); dt.className='l-date';
+        dt.innerHTML='<b>'+dd.getDate()+'</b>'+(dd.getMonth()+1)+'월';
+        row.appendChild(body); row.appendChild(dt);
+        row.addEventListener('click',function(){
+          window.open(l.url,'_blank','noopener');
+        });
+        lgrid.appendChild(row);
+      });
+    });
+    if(!lCount){
+      var le=document.createElement('div'); le.className='empty'; le.style.paddingTop='40px';
+      le.innerHTML='<div class="e-emoji">🔗</div><h2>저장한 링크가 없어요</h2><p>메모에 링크를 붙여 넣으면<br>자동으로 태그·폴더까지 정리돼요.</p>';
+      box.appendChild(le);
+    } else {
+      box.appendChild(lgrid);
+    }
     return;
   }
 
@@ -2056,7 +2328,7 @@ function openSettings(){
   body.appendChild(r5);
 
   var foot=document.createElement('div'); foot.className='set-foot';
-  foot.innerHTML='나와의 메모 · v1.0<br>정희님 전용 메모 웹앱<br>데이터는 이 기기 브라우저에만 저장돼요';
+  foot.innerHTML='나와의 메모 · v1.1<br>정희님 전용 메모 웹앱<br>데이터는 이 기기 브라우저에만 저장돼요';
   body.appendChild(foot);
 
   L.sheet.appendChild(body);
@@ -2204,6 +2476,7 @@ function init(){
   });
   $('#inTitle').addEventListener('input',updateSendState);
   $('#btnSend').addEventListener('click',sendMemo);
+  $('#linkHint').addEventListener('click',applyLinkHint);
   $('#btnPhoto').addEventListener('click',function(){
     filePickTarget=null;
     $('#filePick').value='';
