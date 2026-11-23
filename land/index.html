@@ -396,6 +396,8 @@ img,svg{max-width:100%}
 .toast{display:flex;align-items:center;gap:8px;background:rgba(70,52,64,.94);color:#FFF8FC;font-size:12.8px;font-weight:700;padding:10px 16px;border-radius:999px;box-shadow:0 10px 26px rgba(90,60,80,.28);opacity:0;transform:translateY(10px);transition:.25s;max-width:100%;text-align:center}
 .toast.in{opacity:1;transform:none}
 .toast span:first-child{font-size:14px}
+.link-danger{background:none;border:0;color:#B58CA0;font-size:11.5px;font-weight:700;margin-top:11px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;line-height:1.5}
+.link-danger.armed{color:#E2538E;font-weight:800;text-decoration:none}
 .modal-bg{position:fixed;inset:0;background:rgba(70,50,62,.34);backdrop-filter:blur(3px);z-index:110;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-bg.on{display:flex}
 .modal{background:linear-gradient(170deg,#fff,#FFF8FC);border-radius:24px;padding:26px 24px 22px;max-width:360px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(120,70,100,.28);border:1px solid #FFE6F1;animation:modalIn .28s cubic-bezier(.2,.9,.3,1.2) both}
@@ -902,6 +904,7 @@ img,svg{max-width:100%}
     <p id="modalDesc">설명</p>
     <div class="m-list" id="modalList" style="display:none"></div>
     <button class="btn btn-primary" id="modalBtn">좋아요!</button>
+    <button class="link-danger" id="modalReset" style="display:none">체험 데이터 초기화</button>
   </div>
 </div>
 
@@ -1017,8 +1020,14 @@ function toast(msg,emoji){
   setTimeout(()=>{ el.classList.remove('in'); setTimeout(()=>el.remove(),280); },2600);
 }
 let modalOnClose=null;
+let resetArmed=false;
 function showModal(o){
   o=o||{};
+  resetArmed=false;
+  const rb=$('#modalReset');
+  rb.style.display=o.reset?'block':'none';
+  rb.classList.remove('armed');
+  rb.textContent='체험 데이터 초기화';
   $('#modalEmoji').textContent=o.emoji||'🎉';
   $('#modalTitle').textContent=o.title||'';
   $('#modalDesc').textContent=o.desc||'';
@@ -1033,6 +1042,16 @@ function closeModal(){
   const cb=modalOnClose; modalOnClose=null; if(cb) cb();
 }
 $('#modalBtn').addEventListener('click',closeModal);
+$('#modalReset').addEventListener('click',()=>{
+  if(!resetArmed){
+    resetArmed=true;
+    $('#modalReset').textContent='정말 초기화할까요? 한 번 더 누르면 지워져요';
+    $('#modalReset').classList.add('armed');
+    return;
+  }
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  location.reload();
+});
 $('#modalBg').addEventListener('click',e=>{ if(e.target===$('#modalBg')) closeModal(); });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&$('#modalBg').classList.contains('on')) closeModal(); });
 
@@ -1838,9 +1857,10 @@ $('#wallet').addEventListener('click',()=>{
   showModal({
     emoji:'🌰',
     title:'내 체험 코인',
-    desc:'지금 '+won(s.coins)+' 코인 있어요.\n체험판 코인이라 실제 결제나 환전은 없어요.',
+    desc:'지금 '+won(s.coins)+' 코인 있어요.\n체험판 코인이라 실제 결제나 환전은 없어요.\n기록은 이 브라우저에만 저장됩니다.',
     list:rows||'<div class="m-row"><span>아직 코인 기록이 없어요</span></div>',
-    btn:'닫기'
+    btn:'닫기',
+    reset:true
   });
 });
 
