@@ -25,6 +25,12 @@ body{
   color:#24161D;
   --sc:1;
 }
+/* 투명도 파생값 — 스크립트가 --alpha에 맞춰 다시 계산한다 (html에 넣으므로 :root에 둔다) */
+:root{
+  --alpha:.25;
+  --card-a:.230; --card-a2:.210; --bd-a:.350; --blur:7.5px;
+  --shadow-a:.113; --hd-a:.550; --row-a:.085; --row-bd:.090; --hair-a:.225;
+}
 
 /* ================= 오버레이 카드 ================= */
 .app{display:block;min-height:0}
@@ -39,40 +45,34 @@ body{
 
 .card{
   width:100%;
-  border-radius:22px;
+  border-radius:20px;
   overflow:hidden;
   position:relative;
-  background:rgba(255,232,242,var(--alpha,.87));
-  border:2px solid rgba(255,182,213,.95);
-  backdrop-filter:blur(12px) saturate(1.12);
-  -webkit-backdrop-filter:blur(12px) saturate(1.12);
-  box-shadow:
-    0 14px 34px rgba(120,18,60,.30),
-    0 4px 10px rgba(120,18,60,.18),
-    0 0 0 4px rgba(255,255,255,.22),
-    inset 0 1px 0 rgba(255,255,255,.85);
-}
-.card::after{
-  content:""; position:absolute; left:0; right:0; top:0; height:52px;
-  background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0));
-  pointer-events:none; border-radius:22px 22px 0 0;
+  background:linear-gradient(158deg,
+    rgba(255,209,232,var(--card-a)) 0%,
+    rgba(255,186,219,var(--card-a2)) 52%,
+    rgba(255,202,228,var(--card-a)) 100%);
+  border:1px solid rgba(255,255,255,var(--bd-a));
+  backdrop-filter:blur(var(--blur)) saturate(1.06);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(1.06);
+  box-shadow:0 10px 28px rgba(46,8,26,var(--shadow-a));
 }
 
 /* 헤더 */
 .hd{
   position:relative; z-index:1;
   display:flex; align-items:center; justify-content:center; gap:7px;
-  padding:11px 12px 12px;
-  background:linear-gradient(112deg,#FF86B6 0%,#FF4D8D 46%,#DE2E6B 100%);
-  border-bottom:2px solid rgba(255,255,255,.62);
-  box-shadow:0 4px 12px rgba(196,26,86,.30);
+  padding:10px 12px 11px;
+  background:rgba(255,120,172,var(--hd-a));
+  border-bottom:1px solid rgba(255,255,255,var(--row-bd));
+  box-shadow:none;
 }
-.hd .ico{font-size:18px;line-height:1;filter:drop-shadow(0 1px 1px rgba(120,10,50,.5))}
+.hd .ico{font-size:17px;line-height:1;filter:drop-shadow(0 1px 2px rgba(90,8,36,.45))}
 .hd h1{
   margin:0;
   font-size:19px; font-weight:900; letter-spacing:-.5px; line-height:1.15;
   color:#fff;
-  text-shadow:0 1px 0 rgba(150,18,64,.55), 0 2px 6px rgba(120,10,50,.40);
+  text-shadow:0 1px 3px rgba(72,4,30,.62), 0 0 2px rgba(72,4,30,.5);
   white-space:nowrap;
 }
 
@@ -98,14 +98,19 @@ body.hv .wrap:hover .track{animation-play-state:paused}
 .blk{display:flow-root}
 .row{
   display:flex; align-items:center; gap:8px;
-  padding:8px 9px;
-  margin:5px 0;
-  border-radius:14px;
-  background:rgba(255,255,255,.78);
-  border:1px solid rgba(255,255,255,.9);
-  box-shadow:
-    0 2px 7px rgba(178,52,104,.13),
-    inset 0 1px 0 rgba(255,255,255,.95);
+  padding:6px 8px;
+  margin:2px 0;
+  border-radius:11px;
+  background:rgba(255,255,255,var(--row-a));
+  border:1px solid rgba(255,255,255,var(--row-bd));
+  box-shadow:none;
+  position:relative;
+}
+/* 줄 구분선 — 아주 옅게 */
+.row + .row::before{
+  content:""; position:absolute; left:10px; right:10px; top:-2px; height:1px;
+  background:rgba(255,255,255,var(--hair-a));
+  pointer-events:none;
 }
 .badge{
   flex:0 0 auto;
@@ -115,23 +120,23 @@ body.hv .wrap:hover .track{animation-play-state:paused}
   border-radius:999px;
   font-size:15.5px; font-weight:900; letter-spacing:-.3px;
   color:#fff; white-space:nowrap;
-  text-shadow:0 1px 3px rgba(80,0,36,.55), 0 0 1px rgba(70,0,30,.35);
-  box-shadow:0 3px 8px rgba(190,36,100,.32), inset 0 1px 0 rgba(255,255,255,.35);
+  text-shadow:0 1px 2px rgba(72,0,32,.78), 0 0 4px rgba(72,0,32,.5);
+  box-shadow:0 2px 6px rgba(150,20,80,.22), inset 0 1px 0 rgba(255,255,255,.26);
   font-variant-numeric:tabular-nums;
 }
-.badge.t1{background:linear-gradient(135deg,#FFA0C4,#FF76A9)}
-.badge.t2{background:linear-gradient(135deg,#FF80B0,#FF4D8D)}
-.badge.t3{background:linear-gradient(135deg,#FB4C88,#E22A6C)}
-.badge.t4{background:linear-gradient(135deg,#E32A6C,#B41550)}
-.badge.t5{background:linear-gradient(135deg,#8A1249,#4A0A26)}
+.badge.t1{background:rgba(255,132,180,.72)}
+.badge.t2{background:rgba(255,105,165,.72)}
+.badge.t3{background:rgba(246,80,148,.74)}
+.badge.t4{background:rgba(222,56,124,.76)}
+.badge.t5{background:rgba(163,30,88,.78)}
 .name{
-  font-size:18px; font-weight:800; letter-spacing:-.5px; line-height:1.25;
-  color:#1C1015;
-  text-shadow:0 1px 0 rgba(255,255,255,.75);
+  font-size:18px; font-weight:900; letter-spacing:-.4px; line-height:1.25;
+  color:#FFFFFF;
+  text-shadow:0 1px 4px rgba(25,10,18,.9), 0 0 2px rgba(25,10,18,.85);
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
-.badge .em{filter:drop-shadow(0 1px 0 rgba(86,0,38,.55))}
-.empty{padding:26px 10px;text-align:center;font-weight:800;color:#a8617f;font-size:14px}
+.badge .em{filter:drop-shadow(0 1px 1px rgba(70,0,30,.5))}
+.empty{padding:26px 10px;text-align:center;font-weight:800;color:#fff;font-size:14px;text-shadow:0 1px 4px rgba(25,10,18,.9), 0 0 2px rgba(25,10,18,.85)}
 
 /* ================= 편집 모드 ================= */
 body.editing{overflow-y:auto;background:#0d0f1a !important}
@@ -162,6 +167,10 @@ body.editing .stage{padding:26px 20px 40px;flex:1;align-items:flex-start}
   background-size:28px 28px;
   background-position:0 0,14px 14px;
 }
+/* 미리보기(?bg=...) 일 땐 화면 전체를 배경으로 깔기 */
+body:not(.editing) .stage.bg-dark,
+body:not(.editing) .stage.bg-light,
+body:not(.editing) .stage.bg-check{min-height:100vh}
 
 .panel{
   width:400px; flex:0 0 400px;
@@ -272,8 +281,14 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     </div>
 
     <div class="sec">
-      <span class="lab">배경 진하기 <b id="oVal"></b></span>
-      <input type="range" id="fOpacity" min="50" max="100" step="1">
+      <span class="lab">배경 투명도 <b id="oVal"></b></span>
+      <input type="range" id="fOpacity" min="0" max="100" step="1">
+      <div class="seg" id="opSeg" style="margin-top:8px">
+        <button type="button" data-o="0">0% · 글씨만</button>
+        <button type="button" data-o="25">25% · 은은하게</button>
+        <button type="button" data-o="55">55% · 반투명</button>
+      </div>
+      <p class="hint">기본은 <b>25%</b>예요. 방송 화면이 더 비쳤으면 <b>0%</b>(배경 없이 글씨만)까지 내리시면 돼요.</p>
     </div>
 
     <div class="sec">
@@ -392,7 +407,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   var DEFAULT = {
     t: '하이희야 시그표',
     sp: 32,                          // 롤업 속도 px/초
-    o: 0.87,                         // 배경 진하기(알파)
+    o: 0.25,                         // 배경 진하기(알파) — 기본은 은은한 파스텔 유리
     sc: 1,                           // 배율
     hv: 1,                           // 마우스 올리면 멈춤
     r: 0,                            // 보여줄 구간 (0 = 전체)
@@ -432,7 +447,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     };
     d.t = d.t.slice(0, 20) || DEFAULT.t;
     d.sp = isFinite(d.sp) ? Math.min(90, Math.max(8, d.sp)) : DEFAULT.sp;
-    d.o = isFinite(d.o) ? Math.min(1, Math.max(0.45, d.o)) : DEFAULT.o;
+    d.o = isFinite(d.o) ? Math.min(1, Math.max(0, d.o)) : DEFAULT.o;
     d.sc = isFinite(d.sc) ? Math.min(1.6, Math.max(0.5, d.sc)) : DEFAULT.sc;
     d.r = d.r >= 1 && d.r <= 3 ? d.r : 0;
     d.s = d.s.map(function (x) {
@@ -536,10 +551,28 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
 
   function applyStyle() {
     document.documentElement.style.setProperty('--alpha', S.o);
+    applyAlpha(S.o);
     document.body.style.setProperty('--sc', S.sc);
     document.body.classList.toggle('hv', !!S.hv);
     $('hdTitle').textContent = S.t;
     document.title = '💖 ' + S.t;
+  }
+
+  /* 배경 진하기(0~1)를 각 요소의 투명도로 풀어 준다.
+     0% = 카드는 완전 투명(글씨만), 25% = 은은한 파스텔 유리, 55% = 반투명 */
+  function applyAlpha(a) {
+    a = Math.min(1, Math.max(0, Number(a) || 0));
+    var r = document.documentElement.style;
+    r.setProperty('--alpha', a.toFixed(3));
+    r.setProperty('--card-a', (a * 0.92).toFixed(3));          // 카드 바탕 (25% → 0.23)
+    r.setProperty('--card-a2', (a * 0.84).toFixed(3));         // 카드 바탕 그라데이션 가운데 (25% → 0.21)
+    r.setProperty('--bd-a', Math.min(1, a * 1.40).toFixed(3)); // 카드 테두리 (25% → 0.35)
+    r.setProperty('--blur', (a * 30).toFixed(1) + 'px');       // 유리 흐림 (25% → 7.5px)
+    r.setProperty('--shadow-a', (a * 0.45).toFixed(3));
+    r.setProperty('--hd-a', Math.min(0.70, a * 2.20).toFixed(3));  // 헤더 로즈핑크 (25% → 0.55)
+    r.setProperty('--row-a', Math.min(0.12, a * 0.24).toFixed(3)); // 줄 바탕은 극도로 은은하게
+    r.setProperty('--row-bd', Math.min(0.26, a * 0.26).toFixed(3));
+    r.setProperty('--hair-a', Math.min(0.50, a * 0.90).toFixed(3));
   }
 
   function updateRowInTrack(i) {
@@ -571,6 +604,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   var fTitle = $('fTitle'), fOpacity = $('fOpacity'), fScale = $('fScale'),
       fHover = $('fHover'), fUrl = $('fUrl'), editorList = $('editorList'),
       speedSeg = $('speedSeg'), bgSeg = $('bgSeg'), segSeg = $('segSeg'),
+      opSeg = $('opSeg'),
       oVal = $('oVal'), scVal = $('scVal'), cntEl = $('cnt'), savedMsg = $('savedMsg'),
       fSearch = $('fSearch');
   var saveTimer = null;
@@ -620,6 +654,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     fTitle.value = S.t;
     fOpacity.value = Math.round(S.o * 100);
     oVal.textContent = Math.round(S.o * 100) + '%';
+    syncOpacityPresets();
     fScale.value = Math.round(S.sc * 100);
     scVal.textContent = Math.round(S.sc * 100) + '%';
     fHover.checked = !!S.hv;
@@ -731,12 +766,31 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     save();
   });
 
-  /* 진하기 */
-  fOpacity.addEventListener('input', function () {
-    S.o = Math.min(1, Math.max(0.45, Number(fOpacity.value) / 100));
+  function syncOpacityPresets() {
+    var btns = opSeg.querySelectorAll('button');
+    var pct = Math.round(S.o * 100);
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle('on', Number(btns[i].dataset.o) === pct);
+    }
+  }
+
+  function setOpacity(v) {
+    S.o = Math.min(1, Math.max(0, Number(v) / 100));
+    fOpacity.value = Math.round(S.o * 100);
     oVal.textContent = Math.round(S.o * 100) + '%';
-    document.documentElement.style.setProperty('--alpha', S.o);
+    applyAlpha(S.o);
+    syncOpacityPresets();
     save();
+  }
+
+  /* 진하기 */
+  fOpacity.addEventListener('input', function () { setOpacity(fOpacity.value); });
+
+  /* 진하기 프리셋 */
+  opSeg.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    setOpacity(btn.dataset.o);
   });
 
   /* 크기 */
