@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>💖 하이희야 시그표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800;900&display=swap" rel="stylesheet">
+<script>
+/* 디버깅용: 콘솔 에러를 조용히 모아 둔다 (화면에는 아무것도 그리지 않음) */
+window.__sigErrors = [];
+window.addEventListener('error', function (e) { try { window.__sigErrors.push(String(e.message || e)); } catch (_) {} });
+window.addEventListener('unhandledrejection', function (e) { try { window.__sigErrors.push('promise:' + e.reason); } catch (_) {} });
+</script>
+<style>
+*{box-sizing:border-box}
+html,body{
+  margin:0; padding:0;
+  background:transparent !important;
+  background-color:transparent !important;
+}
+body{
+  overflow:hidden;
+  font-family:'Noto Sans KR',Pretendard,'Apple SD Gothic Neo','Malgun Gothic',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  color:#24161D;
+  --sc:1;
+}
+
+/* ================= 오버레이 카드 ================= */
+.app{display:block;min-height:0}
+.stage{position:relative;display:flex;align-items:flex-start;justify-content:center;padding:0}
+.wrap{
+  width:340px; flex:0 0 auto;
+  padding:10px;
+  transform-origin:top left;
+  transform:scale(var(--sc));
+  transition:transform .12s ease;
+}
+
+.card{
+  width:100%;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  background:rgba(255,232,242,var(--alpha,.87));
+  border:2px solid rgba(255,182,213,.95);
+  backdrop-filter:blur(12px) saturate(1.12);
+  -webkit-backdrop-filter:blur(12px) saturate(1.12);
+  box-shadow:
+    0 14px 34px rgba(120,18,60,.30),
+    0 4px 10px rgba(120,18,60,.18),
+    0 0 0 4px rgba(255,255,255,.22),
+    inset 0 1px 0 rgba(255,255,255,.85);
+}
+.card::after{
+  /* 유리 반사 한 줄 */
+  content:""; position:absolute; left:0; right:0; top:0; height:52px;
+  background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0));
+  pointer-events:none; border-radius:22px 22px 0 0;
+}
+
+/* 헤더 */
+.hd{
+  position:relative; z-index:1;
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  padding:11px 12px 12px;
+  background:linear-gradient(112deg,#FF86B6 0%,#FF4D8D 46%,#DE2E6B 100%);
+  border-bottom:2px solid rgba(255,255,255,.62);
+  box-shadow:0 4px 12px rgba(196,26,86,.30);
+}
+.hd .ico{font-size:18px;line-height:1;filter:drop-shadow(0 1px 1px rgba(120,10,50,.5))}
+.hd h1{
+  margin:0;
+  font-size:19px; font-weight:900; letter-spacing:-.5px; line-height:1.15;
+  color:#fff;
+  text-shadow:0 1px 0 rgba(150,18,64,.55), 0 2px 6px rgba(120,10,50,.40);
+  white-space:nowrap;
+}
+.hd .dot{
+  width:7px;height:7px;border-radius:50%;background:#fff;flex:0 0 auto;
+  box-shadow:0 0 0 3px rgba(255,255,255,.35);
+  animation:blink 1.6s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* 롤업 리스트 */
+.list{
+  position:relative;
+  height:396px;
+  padding:6px 10px;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%);
+}
+.track{
+  will-change:transform;
+  animation:rollup var(--dur,26s) linear infinite;
+}
+@keyframes rollup{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(0,var(--shift,-50%),0)}
+}
+body.hv .wrap:hover .track{animation-play-state:paused}
+
+.blk{display:flow-root}
+.row{
+  display:flex; align-items:center; gap:9px;
+  padding:8px 10px;
+  margin:5px 0;
+  border-radius:14px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:
+    0 2px 7px rgba(178,52,104,.13),
+    inset 0 1px 0 rgba(255,255,255,.95);
+}
+.badge{
+  flex:0 0 auto;
+  min-width:88px;
+  text-align:center;
+  padding:6px 8px;
+  border-radius:999px;
+  font-size:15px; font-weight:900; letter-spacing:-.3px;
+  color:#fff; white-space:nowrap;
+  text-shadow:0 1px 2px rgba(80,0,36,.45);
+  box-shadow:0 3px 8px rgba(190,36,100,.32), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.badge.t1{background:linear-gradient(135deg,#FFA0C4,#FF76A9)}
+.badge.t2{background:linear-gradient(135deg,#FF80B0,#FF4D8D)}
+.badge.t3{background:linear-gradient(135deg,#FB4C88,#E22A6C)}
+.badge.t4{background:linear-gradient(135deg,#E32A6C,#B41550)}
+.badge.t5{background:linear-gradient(135deg,#8A1249,#4A0A26)}
+.name{
+  font-size:18px; font-weight:800; letter-spacing:-.5px; line-height:1.25;
+  color:#24161D;
+  text-shadow:0 1px 0 rgba(255,255,255,.95), 0 0 3px rgba(255,255,255,.7);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* ================= 편집 모드 ================= */
+body.editing{overflow-y:auto;background:#0d0f1a !important}
+body.editing .app{display:flex;align-items:stretch;min-height:100vh}
+body.editing .wrap{transform-origin:top center}
+body.editing .stage{padding:26px 20px 40px;flex:1;align-items:flex-start}
+
+.stage.bg-dark{
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 66px),
+    radial-gradient(58% 44% at 16% 20%,rgba(96,132,255,.38),transparent 70%),
+    radial-gradient(48% 40% at 84% 30%,rgba(255,80,168,.22),transparent 70%),
+    radial-gradient(46% 42% at 62% 88%,rgba(0,240,200,.16),transparent 70%),
+    linear-gradient(160deg,#070a13,#101a31 46%,#080d1b);
+}
+.stage.bg-light{
+  background:
+    radial-gradient(56% 46% at 24% 18%,#FFF6EA,transparent 72%),
+    radial-gradient(50% 44% at 80% 28%,#E9F3FF,transparent 72%),
+    radial-gradient(46% 40% at 56% 88%,#FFE7F1,transparent 72%),
+    linear-gradient(150deg,#FFFDFB,#FDEFE4 52%,#EAF1FF);
+}
+.stage.bg-check{
+  background-color:#f5f5f8;
+  background-image:
+    linear-gradient(45deg,#d9d9e0 25%,transparent 25%,transparent 75%,#d9d9e0 75%),
+    linear-gradient(45deg,#d9d9e0 25%,transparent 25%,transparent 75%,#d9d9e0 75%);
+  background-size:28px 28px;
+  background-position:0 0,14px 14px;
+}
+
+.panel{
+  width:392px; flex:0 0 392px;
+  background:#ffffff;
+  border-right:1px solid #ece6ea;
+  padding:20px 18px 40px;
+  font-size:13px;
+  color:#3a2c33;
+  max-height:100vh;
+  overflow-y:auto;
+  position:sticky; top:0; align-self:flex-start;
+}
+.panel[hidden]{display:none}
+.panel h1{font-size:17px;margin:0 0 6px;color:#24161D;letter-spacing:-.5px}
+.panel .lead{margin:0 0 16px;font-size:12.5px;line-height:1.6;color:#7b6a73}
+.panel .lead b{color:#E22A6C}
+.panel .sec{margin:0 0 16px}
+.panel .lab{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12.5px;color:#5b454f;margin-bottom:7px}
+.panel .lab b{color:#E22A6C;font-weight:800}
+.fld{display:block;margin:0 0 16px;font-weight:800;font-size:12.5px;color:#5b454f}
+input[type=text],input[type=number],input[readonly]{
+  width:100%;font:inherit;color:#24161D;background:#fdf7fa;
+  border:1px solid #f0dde6;border-radius:10px;padding:9px 10px;outline:none;
+}
+input[type=text]:focus,input[type=number]:focus{border-color:#FF7DAF;background:#fff}
+.fld input{margin-top:7px;font-weight:700}
+.erow{display:flex;align-items:center;gap:5px;margin-bottom:6px}
+.erow .e-b{width:76px;flex:0 0 76px;font-weight:800;text-align:center}
+.erow .e-n{flex:1 1 auto;min-width:0;font-weight:700}
+.mini{
+  flex:0 0 auto;width:26px;height:32px;border-radius:8px;border:1px solid #f0dde6;background:#fff;
+  color:#8a7680;font-size:12px;font-weight:800;cursor:pointer;line-height:1;
+}
+.mini:hover{background:#fff2f7;border-color:#FFB0CD;color:#E22A6C}
+.mini.del:hover{background:#ffeef3;border-color:#FF8FB5;color:#C9144F}
+.btn{
+  font:inherit;font-weight:800;cursor:pointer;border:none;border-radius:10px;
+  padding:10px 14px;background:linear-gradient(135deg,#FF86B6,#EE3A78);color:#fff;
+  box-shadow:0 4px 12px rgba(226,42,108,.28);
+}
+.btn:hover{filter:brightness(1.04)}
+.btn.ghost{background:#fff;color:#E22A6C;border:1px dashed #FFA9C9;box-shadow:none}
+.btn.ghost:hover{background:#fff5f9}
+.btn.danger{color:#a3305a;border-color:#ffd0e0}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{
+  flex:1 1 auto;font:inherit;font-weight:800;font-size:12px;cursor:pointer;
+  padding:9px 6px;border-radius:10px;border:1px solid #f0dde6;background:#fff;color:#876c78;
+}
+.seg button.on{background:linear-gradient(135deg,#FF86B6,#EE3A78);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(226,42,108,.25)}
+input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
+.chk{display:flex;align-items:center;gap:8px;font-weight:800;font-size:12.5px;color:#5b454f;margin:0 0 16px;cursor:pointer}
+.chk input{width:16px;height:16px;accent-color:#EE3A78;margin:0}
+.urlrow{display:flex;gap:6px}
+.urlrow input{font-size:11.5px;color:#6a5560;background:#fbf6f8}
+.urlrow .btn{padding:9px 12px;font-size:12px;flex:0 0 auto}
+.hint{font-size:11.5px;line-height:1.65;color:#8b7882;margin:8px 0 0}
+.hint b{color:#E22A6C}
+.saved{font-size:11.5px;color:#3aa06a;font-weight:800;min-height:16px}
+.panel .divider{height:1px;background:#f4e8ee;margin:4px 0 16px}
+
+@media (max-width:860px){
+  body.editing .app{display:block}
+  body.editing .panel{width:auto;flex:none;max-height:none;position:static;border-right:none;border-top:1px solid #ece6ea;order:2}
+  body.editing .stage{padding:18px 12px 22px}
+  body.editing .app{display:flex;flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="panel" id="panel" hidden>
+    <h1>🎀 시그표 편집기</h1>
+    <p class="lead">고친 내용은 이 브라우저에 자동 저장돼요. 방송에 넣을 땐 아래 <b>프릭샷 URL</b>을 복사해서 브라우저 소스에 넣으시면 돼요.</p>
+
+    <label class="fld">시그표 제목
+      <input type="text" id="fTitle" maxlength="20" placeholder="하이희야 시그표">
+    </label>
+
+    <div class="sec">
+      <span class="lab">시그 목록 <b id="cnt"></b></span>
+      <div id="editorList"></div>
+      <button class="btn ghost" id="addBtn" style="width:100%;margin-top:4px">＋ 시그 추가</button>
+    </div>
+
+    <div class="sec">
+      <span class="lab">롤업 속도</span>
+      <div class="seg" id="speedSeg">
+        <button type="button" data-sp="20">느리게</button>
+        <button type="button" data-sp="32">보통</button>
+        <button type="button" data-sp="52">빠르게</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <span class="lab">배경 진하기 <b id="oVal"></b></span>
+      <input type="range" id="fOpacity" min="50" max="100" step="1">
+    </div>
+
+    <div class="sec">
+      <span class="lab">크기 <b id="scVal"></b></span>
+      <input type="range" id="fScale" min="60" max="150" step="5">
+    </div>
+
+    <label class="chk"><input type="checkbox" id="fHover"> 마우스를 올리면 잠시 멈추기</label>
+
+    <div class="sec">
+      <span class="lab">방송 화면 미리보기</span>
+      <div class="seg" id="bgSeg">
+        <button type="button" data-bg="dark">어두운 게임</button>
+        <button type="button" data-bg="light">밝은 캠</button>
+        <button type="button" data-bg="check">투명 확인</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sec">
+      <span class="lab">프릭샷 · OBS 브라우저 소스 URL</span>
+      <div class="urlrow">
+        <input type="text" id="fUrl" readonly>
+        <button class="btn" id="copyBtn">복사</button>
+      </div>
+      <p class="hint" id="openHint">
+        프릭샷 Plus → 장면 소스 리스트 → <b>+ 소스 추가</b> → <b>브라우저 소스</b> → 위 주소 붙여넣기<br>
+        (배경은 자동으로 투명, 크기는 360 × 480 정도로 잡으시면 딱 맞아요)
+      </p>
+      <p class="saved" id="savedMsg"></p>
+    </div>
+
+    <div class="sec">
+      <button class="btn ghost danger" id="resetBtn" style="width:100%">예시 시그로 되돌리기</button>
+    </div>
+  </aside>
+
+  <div class="stage" id="stage">
+    <div class="wrap" id="wrap">
+      <div class="card" id="card">
+        <div class="hd">
+          <span class="ico">💖</span>
+          <h1 id="hdTitle">하이희야 시그표</h1>
+          <span class="dot"></span>
+        </div>
+        <div class="list" id="list">
+          <div class="track" id="track"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------- 기본값 ---------------- */
+  var STORE = 'heeyahi_sig_v1';
+
+  var DEFAULT = {
+    t: '하이희야 시그표',            // 제목
+    sp: 32,                          // 롤업 속도 px/초
+    o: 0.87,                         // 배경 진하기(알파)
+    sc: 1,                           // 배율
+    hv: 1,                           // 마우스 올리면 멈춤
+    s: [
+      { b: 100,   n: '하트시그' },
+      { b: 200,   n: '윙크시그' },
+      { b: 300,   n: '냥냥댄스' },
+      { b: 400,   n: '삐끼삐끼' },
+      { b: 500,   n: '제로투' },
+      { b: 700,   n: '애교 3종 세트' },
+      { b: 1000,  n: '힙합댄스' },
+      { b: 1414,  n: '식사권' },
+      { b: 2000,  n: '사투리 애교' },
+      { b: 3000,  n: '방셀 1컷' },
+      { b: 5000,  n: '역팬' },
+      { b: 7000,  n: '엔딩 포즈' },
+      { b: 10000, n: '풀방셀' }
+    ]
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var params = new URLSearchParams(location.search);
+  var editMode = params.get('edit') === '1' || params.get('edit') === 'true';
+
+  /* ---------------- base64url ---------------- */
+  function b64e(str) {
+    var bytes = new TextEncoder().encode(str), bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function b64d(s) {
+    s = String(s).replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
+    var bin = atob(s), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  /* ---------------- 상태 ---------------- */
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+  function norm(o) {
+    o = o || {};
+    var d = {
+      t: o.t != null ? String(o.t) : DEFAULT.t,
+      sp: Number(o.sp), o: Number(o.o), sc: Number(o.sc),
+      hv: o.hv === 0 || o.hv === '0' || o.hv === false ? 0 : 1,
+      s: Array.isArray(o.s) ? o.s : clone(DEFAULT.s)
+    };
+    d.t = d.t.slice(0, 20) || DEFAULT.t;
+    d.sp = isFinite(d.sp) ? Math.min(90, Math.max(8, d.sp)) : DEFAULT.sp;
+    d.o = isFinite(d.o) ? Math.min(1, Math.max(0.45, d.o)) : DEFAULT.o;
+    d.sc = isFinite(d.sc) ? Math.min(1.6, Math.max(0.5, d.sc)) : DEFAULT.sc;
+    d.s = d.s.map(function (x) {
+      return { b: Math.max(0, Math.min(9999999, Number(x && x.b) || 0)), n: String((x && x.n) || '').slice(0, 24) };
+    }).slice(0, 40);
+    if (!d.s.length) d.s = clone(DEFAULT.s);
+    return d;
+  }
+
+  function load() {
+    var raw = params.get('d');
+    if (raw) {
+      try { return norm(JSON.parse(b64d(raw))); } catch (e) { /* 잘못된 링크면 기본값 */ }
+    }
+    try {
+      var ls = localStorage.getItem(STORE);
+      if (ls) return norm(JSON.parse(ls));
+    } catch (e) { /* 저장소를 못 쓰는 브라우저(프릭샷 등)는 기본값 */ }
+    return norm(clone(DEFAULT));
+  }
+
+  var S = load();
+
+  /* ---------------- 작은 도구 ---------------- */
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmt(n) { return Number(n || 0).toLocaleString('ko-KR'); }
+  function tierCls(b) {
+    if (b <= 499) return 't1';
+    if (b <= 999) return 't2';
+    if (b <= 2999) return 't3';
+    if (b <= 9999) return 't4';
+    return 't5';
+  }
+  function emojiOf(b) { return b >= 10000 ? '💎' : b >= 3000 ? '👑' : b >= 1000 ? '💖' : '🎈'; }
+  function badgeHTML(it) {
+    var b = Number(it.b) || 0;
+    return '<span class="badge ' + tierCls(b) + '">' + emojiOf(b) + ' ' + fmt(b) + '</span>';
+  }
+
+  /* ---------------- 오버레이 그리기 ---------------- */
+  var trackEl = $('track'), listEl = $('list'), wrapEl = $('wrap'), cardEl = $('card'), stageEl = $('stage');
+
+  function rowsHTML() {
+    return S.s.map(function (it, i) {
+      return '<div class="row" data-i="' + i + '">' + badgeHTML(it) +
+             '<span class="name">' + esc(it.n) + '</span></div>';
+    }).join('');
+  }
+
+  function renderTrack() {
+    var block = rowsHTML();
+    trackEl.innerHTML = '<div class="blk">' + block + '</div>';
+    var blkH = trackEl.firstChild.offsetHeight || 1;   // transform(배율)에 영향받지 않는 높이
+    var listH = listEl.clientHeight || 396;
+    // 한 바퀴에 화면이 비지 않도록 복사본 개수를 정한다
+    var copies = Math.max(2, Math.ceil(listH / blkH) + 1);
+    var html = '';
+    for (var c = 0; c < copies; c++) html += '<div class="blk">' + block + '</div>';
+    trackEl.innerHTML = html;
+    trackEl.style.setProperty('--shift', (-100 / copies).toFixed(4) + '%');
+    trackEl.style.setProperty('--dur', Math.max(4, blkH / S.sp).toFixed(2) + 's');
+    trackEl.style.animationName = 'none';
+    void trackEl.offsetWidth;           // 애니메이션 재시작
+    trackEl.style.animationName = '';
+  }
+
+  function applyStyle() {
+    document.documentElement.style.setProperty('--alpha', S.o);
+    document.body.style.setProperty('--sc', S.sc);
+    document.body.classList.toggle('hv', !!S.hv);
+    $('hdTitle').textContent = S.t;
+    document.title = '💖 ' + S.t;
+  }
+
+  function updateRowInTrack(i) {
+    var it = S.s[i];
+    if (!it) return;
+    var rows = trackEl.querySelectorAll('.row[data-i="' + i + '"]');
+    for (var k = 0; k < rows.length; k++) {
+      var r = rows[k];
+      var badge = r.querySelector('.badge');
+      if (badge) badge.outerHTML = badgeHTML(it);
+      var name = r.querySelector('.name');
+      if (name) name.textContent = it.n;
+    }
+  }
+
+  /* ---------------- 프릭샷 URL ---------------- */
+  function shareURL() {
+    var base = location.origin + location.pathname;
+    var data = { t: S.t, sp: S.sp, o: Math.round(S.o * 100) / 100, sc: S.sc, hv: S.hv, s: S.s };
+    return base + '?d=' + b64e(JSON.stringify(data));
+  }
+
+  /* ---------------- 편집 패널 ---------------- */
+  var fTitle = $('fTitle'), fOpacity = $('fOpacity'), fScale = $('fScale'),
+      fHover = $('fHover'), fUrl = $('fUrl'), editorList = $('editorList'),
+      speedSeg = $('speedSeg'), bgSeg = $('bgSeg'), oVal = $('oVal'), scVal = $('scVal'),
+      cntEl = $('cnt'), savedMsg = $('savedMsg');
+  var saveTimer = null;
+
+  function markSaved() {
+    if (!editMode) return;
+    savedMsg.textContent = '✔ 저장했어요';
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { savedMsg.textContent = ''; }, 1400);
+  }
+
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {}
+    if (editMode) { fUrl.value = shareURL(); markSaved(); }
+  }
+
+  function renderEditorList() {
+    var html = '';
+    S.s.forEach(function (it, i) {
+      html += '<div class="erow" data-i="' + i + '">' +
+        '<input class="e-b" type="number" min="0" step="50" value="' + (Number(it.b) || 0) + '" inputmode="numeric" aria-label="별풍선 개수">' +
+        '<input class="e-n" type="text" maxlength="24" value="' + esc(it.n) + '" aria-label="시그 이름">' +
+        '<button type="button" class="mini up" title="위로">↑</button>' +
+        '<button type="button" class="mini dn" title="아래로">↓</button>' +
+        '<button type="button" class="mini del" title="삭제">✕</button>' +
+      '</div>';
+    });
+    editorList.innerHTML = html;
+    cntEl.textContent = S.s.length + '개';
+  }
+
+  function syncControls() {
+    fTitle.value = S.t;
+    fOpacity.value = Math.round(S.o * 100);
+    oVal.textContent = Math.round(S.o * 100) + '%';
+    fScale.value = Math.round(S.sc * 100);
+    scVal.textContent = Math.round(S.sc * 100) + '%';
+    fHover.checked = !!S.hv;
+    var btns = speedSeg.querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', Number(btns[i].dataset.sp) === S.sp);
+    fUrl.value = shareURL();
+  }
+
+  function startEdit() {
+    document.body.classList.add('editing');
+    $('panel').hidden = false;
+    var bg = params.get('bg') || 'dark';
+    setPreviewBg(bg);
+    renderEditorList();
+    syncControls();
+  }
+
+  function setPreviewBg(bg) {
+    stageEl.classList.remove('bg-dark', 'bg-light', 'bg-check');
+    stageEl.classList.add('bg-' + bg);
+    var btns = bgSeg.querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', btns[i].dataset.bg === bg);
+  }
+
+  /* 제목 */
+  fTitle.addEventListener('input', function () {
+    S.t = (fTitle.value || DEFAULT.t).slice(0, 20);
+    $('hdTitle').textContent = S.t || DEFAULT.t;
+    document.title = '💖 ' + (S.t || DEFAULT.t);
+    save();
+  });
+
+  /* 목록 편집 */
+  editorList.addEventListener('input', function (e) {
+    var erow = e.target.closest('.erow');
+    if (!erow) return;
+    var i = Number(erow.dataset.i);
+    if (!S.s[i]) return;
+    if (e.target.classList.contains('e-b')) {
+      var v = Math.max(0, Math.min(9999999, Number(String(e.target.value).replace(/[^\d]/g, '')) || 0));
+      S.s[i].b = v;
+      updateRowInTrack(i);
+    } else if (e.target.classList.contains('e-n')) {
+      S.s[i].n = e.target.value.slice(0, 24);
+      updateRowInTrack(i);
+    } else { return; }
+    save();
+  });
+
+  editorList.addEventListener('click', function (e) {
+    var btn = e.target.closest('.mini');
+    if (!btn) return;
+    var erow = btn.closest('.erow');
+    var i = Number(erow.dataset.i);
+    if (!S.s[i]) return;
+    if (btn.classList.contains('del')) {
+      if (S.s.length <= 1) { savedMsg.textContent = '시그는 최소 1개는 있어야 해요'; return; }
+      S.s.splice(i, 1);
+    } else if (btn.classList.contains('up') && i > 0) {
+      var a = S.s.splice(i, 1)[0]; S.s.splice(i - 1, 0, a);
+    } else if (btn.classList.contains('dn') && i < S.s.length - 1) {
+      var b = S.s.splice(i, 1)[0]; S.s.splice(i + 1, 0, b);
+    } else { return; }
+    renderEditorList();
+    renderTrack();
+    save();
+  });
+
+  $('addBtn').addEventListener('click', function () {
+    var last = S.s[S.s.length - 1];
+    S.s.push({ b: last ? Number(last.b) + 500 : 100, n: '새 시그' });
+    renderEditorList();
+    renderTrack();
+    save();
+    editorList.lastElementChild.querySelector('.e-n').focus();
+    editorList.lastElementChild.querySelector('.e-n').select();
+  });
+
+  /* 속도 */
+  speedSeg.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    S.sp = Number(btn.dataset.sp);
+    var btns = speedSeg.querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', btns[i] === btn);
+    renderTrack();
+    save();
+  });
+
+  /* 진하기 */
+  fOpacity.addEventListener('input', function () {
+    S.o = Math.min(1, Math.max(0.45, Number(fOpacity.value) / 100));
+    oVal.textContent = Math.round(S.o * 100) + '%';
+    document.documentElement.style.setProperty('--alpha', S.o);
+    save();
+  });
+
+  /* 크기 */
+  fScale.addEventListener('input', function () {
+    S.sc = Math.min(1.6, Math.max(0.5, Number(fScale.value) / 100));
+    scVal.textContent = Math.round(S.sc * 100) + '%';
+    document.body.style.setProperty('--sc', S.sc);
+    save();
+  });
+
+  /* 멈춤 */
+  fHover.addEventListener('change', function () {
+    S.hv = fHover.checked ? 1 : 0;
+    document.body.classList.toggle('hv', !!S.hv);
+    save();
+  });
+
+  /* 미리보기 배경 */
+  bgSeg.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    setPreviewBg(btn.dataset.bg);
+  });
+
+  /* URL 복사 */
+  $('copyBtn').addEventListener('click', function () {
+    var url = shareURL();
+    fUrl.value = url;
+    var done = function () { savedMsg.textContent = '✔ 프릭샷 URL 복사 완료!'; clearTimeout(saveTimer); saveTimer = setTimeout(function () { savedMsg.textContent = ''; }, 2600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, function () { fUrl.select(); document.execCommand('copy'); done(); });
+    } else {
+      fUrl.select(); try { document.execCommand('copy'); } catch (e) {} done();
+    }
+  });
+
+  fUrl.addEventListener('click', function () { fUrl.select(); });
+
+  /* 초기화 */
+  $('resetBtn').addEventListener('click', function () {
+    if (!confirm('예시 시그 목록으로 되돌릴까요? 지금 목록은 사라져요.')) return;
+    S = norm(clone(DEFAULT));
+    renderEditorList();
+    syncControls();
+    renderTrack();
+    applyStyle();
+    save();
+  });
+
+  /* ---------------- 시작 ---------------- */
+  applyStyle();
+  renderTrack();
+
+  // 웹폰트가 늦게 오면 줄 높이가 달라지므로 한 번 더 계산
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { renderTrack(); }).catch(function () {});
+  }
+  window.addEventListener('load', function () { renderTrack(); });
+  window.addEventListener('resize', function () { renderTrack(); });
+
+  if (editMode) {
+    startEdit();
+  } else {
+    // ?bg=dark|light|check — 방송 화면에 얹힌 느낌으로 미리 보기 (버튼·안내문 없음)
+    var bg = params.get('bg');
+    if (bg === 'dark' || bg === 'light' || bg === 'check') stageEl.classList.add('bg-' + bg);
+  }
+})();
+</script>
+</body>
+</html>
