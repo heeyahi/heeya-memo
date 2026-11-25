@@ -33,7 +33,7 @@ body{
 .app{display:block;min-height:0}
 .stage{position:relative;display:flex;align-items:flex-start;justify-content:center;padding:0}
 .wrap{
-  width:340px; flex:0 0 auto;
+  width:352px; flex:0 0 auto;
   padding:10px;
   transform-origin:top left;
   transform:scale(var(--sc));
@@ -56,7 +56,6 @@ body{
     inset 0 1px 0 rgba(255,255,255,.85);
 }
 .card::after{
-  /* 유리 반사 한 줄 */
   content:""; position:absolute; left:0; right:0; top:0; height:52px;
   background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0));
   pointer-events:none; border-radius:22px 22px 0 0;
@@ -90,7 +89,7 @@ body{
 .list{
   position:relative;
   height:396px;
-  padding:6px 10px;
+  padding:6px 9px;
   overflow:hidden;
   -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%);
   mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%);
@@ -107,8 +106,8 @@ body.hv .wrap:hover .track{animation-play-state:paused}
 
 .blk{display:flow-root}
 .row{
-  display:flex; align-items:center; gap:9px;
-  padding:8px 10px;
+  display:flex; align-items:center; gap:8px;
+  padding:8px 9px;
   margin:5px 0;
   border-radius:14px;
   background:rgba(255,255,255,.78);
@@ -119,14 +118,15 @@ body.hv .wrap:hover .track{animation-play-state:paused}
 }
 .badge{
   flex:0 0 auto;
-  min-width:88px;
+  min-width:97px;            /* 5자리(30,000)도 한 줄에 들어가게 */
   text-align:center;
-  padding:6px 8px;
+  padding:6px 10px;
   border-radius:999px;
   font-size:15px; font-weight:900; letter-spacing:-.3px;
   color:#fff; white-space:nowrap;
   text-shadow:0 1px 2px rgba(80,0,36,.45);
   box-shadow:0 3px 8px rgba(190,36,100,.32), inset 0 1px 0 rgba(255,255,255,.35);
+  font-variant-numeric:tabular-nums;
 }
 .badge.t1{background:linear-gradient(135deg,#FFA0C4,#FF76A9)}
 .badge.t2{background:linear-gradient(135deg,#FF80B0,#FF4D8D)}
@@ -139,6 +139,7 @@ body.hv .wrap:hover .track{animation-play-state:paused}
   text-shadow:0 1px 0 rgba(255,255,255,.95), 0 0 3px rgba(255,255,255,.7);
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
+.empty{padding:26px 10px;text-align:center;font-weight:800;color:#a8617f;font-size:14px}
 
 /* ================= 편집 모드 ================= */
 body.editing{overflow-y:auto;background:#0d0f1a !important}
@@ -171,7 +172,7 @@ body.editing .stage{padding:26px 20px 40px;flex:1;align-items:flex-start}
 }
 
 .panel{
-  width:392px; flex:0 0 392px;
+  width:400px; flex:0 0 400px;
   background:#ffffff;
   border-right:1px solid #ece6ea;
   padding:20px 18px 40px;
@@ -196,7 +197,7 @@ input[type=text],input[type=number],input[readonly]{
 input[type=text]:focus,input[type=number]:focus{border-color:#FF7DAF;background:#fff}
 .fld input{margin-top:7px;font-weight:700}
 .erow{display:flex;align-items:center;gap:5px;margin-bottom:6px}
-.erow .e-b{width:76px;flex:0 0 76px;font-weight:800;text-align:center}
+.erow .e-b{width:80px;flex:0 0 80px;font-weight:800;text-align:center}
 .erow .e-n{flex:1 1 auto;min-width:0;font-weight:700}
 .mini{
   flex:0 0 auto;width:26px;height:32px;border-radius:8px;border:1px solid #f0dde6;background:#fff;
@@ -217,6 +218,7 @@ input[type=text]:focus,input[type=number]:focus{border-color:#FF7DAF;background:
 .seg button{
   flex:1 1 auto;font:inherit;font-weight:800;font-size:12px;cursor:pointer;
   padding:9px 6px;border-radius:10px;border:1px solid #f0dde6;background:#fff;color:#876c78;
+  white-space:nowrap;
 }
 .seg button.on{background:linear-gradient(135deg,#FF86B6,#EE3A78);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(226,42,108,.25)}
 input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
@@ -229,12 +231,13 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
 .hint b{color:#E22A6C}
 .saved{font-size:11.5px;color:#3aa06a;font-weight:800;min-height:16px}
 .panel .divider{height:1px;background:#f4e8ee;margin:4px 0 16px}
+.listbox{max-height:min(46vh,420px);overflow-y:auto;padding-right:4px}
+.erow.hide{display:none}
 
-@media (max-width:860px){
-  body.editing .app{display:block}
+@media (max-width:900px){
+  body.editing .app{display:flex;flex-direction:column}
   body.editing .panel{width:auto;flex:none;max-height:none;position:static;border-right:none;border-top:1px solid #ece6ea;order:2}
   body.editing .stage{padding:18px 12px 22px}
-  body.editing .app{display:flex;flex-direction:column}
 }
 </style>
 </head>
@@ -243,16 +246,28 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
 
   <aside class="panel" id="panel" hidden>
     <h1>🎀 시그표 편집기</h1>
-    <p class="lead">고친 내용은 이 브라우저에 자동 저장돼요. 방송에 넣을 땐 아래 <b>프릭샷 URL</b>을 복사해서 브라우저 소스에 넣으시면 돼요.</p>
+    <p class="lead">전체 <b id="totalCnt">294</b>개가 자동으로 롤업돼요. 고친 내용은 이 브라우저에 자동 저장되고, 방송에 넣을 땐 아래 <b>프릭샷 URL</b>을 복사해서 브라우저 소스에 넣으시면 돼요.</p>
 
     <label class="fld">시그표 제목
       <input type="text" id="fTitle" maxlength="20" placeholder="하이희야 시그표">
     </label>
 
     <div class="sec">
+      <span class="lab">보여줄 구간 <b id="segInfo"></b></span>
+      <div class="seg" id="segSeg">
+        <button type="button" data-r="0">전체</button>
+        <button type="button" data-r="1">1구간</button>
+        <button type="button" data-r="2">2구간</button>
+        <button type="button" data-r="3">3구간</button>
+      </div>
+      <p class="hint">전체는 294개가 다 돌아요. 구간을 고르면 그 묶음만 롤업돼요 (예: 1구간 101 ~ 1,009).</p>
+    </div>
+
+    <div class="sec">
       <span class="lab">시그 목록 <b id="cnt"></b></span>
-      <div id="editorList"></div>
-      <button class="btn ghost" id="addBtn" style="width:100%;margin-top:4px">＋ 시그 추가</button>
+      <input type="text" id="fSearch" placeholder="🔍 이름이나 개수로 찾기" style="margin-bottom:8px">
+      <div class="listbox" id="listbox"><div id="editorList"></div></div>
+      <button class="btn ghost" id="addBtn" style="width:100%;margin-top:8px">＋ 시그 추가</button>
     </div>
 
     <div class="sec">
@@ -293,15 +308,15 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
         <input type="text" id="fUrl" readonly>
         <button class="btn" id="copyBtn">복사</button>
       </div>
-      <p class="hint" id="openHint">
+      <p class="hint">
         프릭샷 Plus → 장면 소스 리스트 → <b>+ 소스 추가</b> → <b>브라우저 소스</b> → 위 주소 붙여넣기<br>
-        (배경은 자동으로 투명, 크기는 360 × 480 정도로 잡으시면 딱 맞아요)
+        (배경 자동 투명 · 크기는 370 × 480 정도로 잡으면 딱 맞아요)
       </p>
       <p class="saved" id="savedMsg"></p>
     </div>
 
     <div class="sec">
-      <button class="btn ghost danger" id="resetBtn" style="width:100%">예시 시그로 되돌리기</button>
+      <button class="btn ghost danger" id="resetBtn" style="width:100%">처음 시그표로 되돌리기</button>
     </div>
   </aside>
 
@@ -326,31 +341,73 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
 (function () {
   'use strict';
 
-  /* ---------------- 기본값 ---------------- */
-  var STORE = 'heeyahi_sig_v1';
+  /* ---------------- 실제 시그 목록 (2026-11-25, 방송국 post/207922183 · 총 294개) ---------------- */
+  /* [별풍선 개수, 시그 이름] — 적어 주신 순서 그대로 */
+  var SIGDATA = [
+[101,'치킨바나나'],[103,'날라리'],[104,'Taylor swift'],[105,'푸른산호초'],[110,'모찌송'],[111,'외모체크'],
+[116,'츄'],[117,'A'],[120,'킹받으면 좋겠어'],[122,'밤이무서워'],[128,'너만아니면 돼'],[131,'트월킹덕'],
+[133,'포로엉덩이'],[136,'야르송'],[139,'갱스타워크'],[141,'파라파라'],[142,'잇츠미'],[145,'하이어'],
+[146,'빛을따라서'],[149,'간바레센빠이'],[153,'팬서비스'],[156,'후이즈쉬'],[166,'짧은치마'],[169,'희야플러스'],
+[174,'바람피면디져'],[175,'스윙'],[178,'러브쉐이크'],[182,'킹받쥬'],[183,'a가알려줄게'],[184,'L.S.D'],
+[186,'야메떼'],[187,'캐치캐치'],[189,'나랑사귈래'],[200,'It\'s Sexy'],[201,'붐샤카라카'],[202,'스트레인지'],
+[203,'간밧떼'],[204,'너모지'],[207,'왜요왜요'],[210,'앙카'],[211,'뱅뱅뱅'],[214,'내가S면넌N'],
+[215,'MENTE MÁ'],[218,'씌바레쓰고'],[220,'노크챌린지'],[222,'1도없어'],[223,'뽀로로'],[224,'고민중독'],
+[225,'여름이었다'],[229,'반해'],[232,'내 얘길 들어봐'],[233,'자기소개'],[246,'슈퍼빛을따라서'],[247,'EDM'],
+[250,'질풍가도'],[252,'알로하오예'],[253,'센세'],[258,'오빠바이러스'],[262,'유유'],[266,'우유'],
+[288,'모또모또'],[299,'돈생기면풍쏨'],[300,'새드썸타임'],[305,'머니'],[311,'홀리몰리'],[364,'백개내놔'],
+[388,'슈퍼헨타이'],[377,'드라군'],[399,'모또X1.5'],[458,'오빠'],[499,'호텔파티'],[500,'호미들'],
+[501,'오렌지디스코'],[505,'런던'],[534,'뒤를돌아봅니다'],[575,'핑크레이디'],[582,'오빠하앙'],[588,'무적함대'],
+[591,'계엄령'],[600,'Heart of glass'],[610,'피리'],[650,'두더지'],[666,'아파트'],[727,'Ski Ski'],
+[777,'원더랜드'],[789,'스파크'],[800,'빵훈신호탄'],[808,'미니언즈'],[874,'Just blow'],[888,'쿠팡준비됨'],
+[892,'맞..나해도되?'],[982,'굿바이'],[1000,'웰컴투씨나인'],[1001,'◇맹수◇'],[1002,'봉다리'],[1003,'쥬'],
+[1004,'퀸어셈블'],[1005,'Not like us'],[1008,'첩'],[1009,'C-NINE'],[1010,'응원은준비됨'],[1011,'애기뽀스★'],
+[1012,'만로디'],[1013,'애케스트라'],[1014,'감나무'],[1015,'그럼요'],[1017,'꿀밤족구'],[1018,'크리드★'],
+[1019,'강포커'],[1020,'호구모오'],[1021,'moo.좀걸림'],[1022,'드리밍'],[1023,'사랑한다고'],[1024,'영원한편돌이'],
+[1025,'하츄'],[1026,'안드루'],[1027,'헤이즐★'],[1028,'희셈블'],[1030,'황태자'],[1031,'퓨전★'],
+[1032,'으악★'],[1033,'티븐'],[1034,'슈퍼고릴라'],[1040,'만개화'],[1044,'하메쓰'],[1045,'참치마요'],
+[1047,'철줌마효진'],[1048,'포람페'],[1052,'도링'],[1054,'방송볼거없NA'],[1056,'RED'],[1057,'윙백★'],
+[1059,'당박이사랑할때'],[1060,'적당한노틸'],[1062,'낭만뽀이'],[1063,'하이한강★'],[1064,'혜루아줌마'],[1065,'물개'],
+[1066,'Heart'],[1067,'하이Uu★'],[1069,'더끼'],[1070,'초월'],[1072,'시녀장팀'],[1073,'김복덩V'],
+[1075,'바크콜브'],[1078,'철박이'],[1079,'음바페단장'],[1080,'호구야매'],[1081,'키다리아제씨'],[1082,'미친베니★'],
+[1084,'배틀탄마린'],[1086,'Clover'],[1091,'개틀딱'],[1092,'로떼누나★'],[1094,'맞나?! ★'],[1096,'드랍더비트★'],
+[1097,'코인러형규'],[1098,'하이건빵★'],[1100,'T-MONEY★'],[1101,'치지직★'],[1102,'LWB★'],[1103,'Water'],
+[1105,'슈가'],[1106,'현현'],[1108,'공주야오빠왔다'],[1109,'꽃탱구★'],[1110,'하이Uu★'],[1111,'라페라리'],
+[1113,'코인은길대장'],[1114,'V10_멜로디'],[1115,'예수형'],[1119,'JUNU'],[1120,'COOL쿨쿨'],[1121,'오승환이다'],
+[1122,'천원은있다'],[1123,'위장'],[1124,'응이사'],[1125,'한여름밤의꿈'],[1128,'꾸랑죠★'],[1129,'Never let go'],
+[1130,'커즈'],[1146,'과묵한아저씨'],[1150,'Happiness_24'],[1152,'로즈★'],[1153,'되는닉이없네'],[1154,'마르셀린'],
+[1156,'석ddd'],[1163,'5수생'],[1164,'Lafestar'],[1169,'바멘'],[1170,'오늘만산다'],[1174,'벨라74'],
+[1176,'Fall'],[1177,'징징쓰'],[1179,'터미널'],[1183,'Terry'],[1186,'탕수육중독'],[1187,'오태식2'],
+[1188,'C9임'],[1189,'폴멘'],[1190,'00년생'],[1191,'Princess on'],[1194,'LurkerXCIV'],[1195,'아구몬이다'],
+[1198,'리드오프'],[1199,'인생뭐있어'],[1200,'T-MONEY_2★'],[1203,'꽃보다와e다'],[1211,'Sexy Queen'],[1212,'어깨펴라 ㅅㅂ'],
+[1213,'Lacrimosa'],[1222,'족구졸려'],[1223,'마티니'],[1225,'크리스마스'],[1233,'꼰돔피팅모델'],[1234,'Queens'],
+[1242,'라네트'],[1247,'채리네뽀식이'],[1252,'V12_Melody'],[1255,'북동2'],[1259,'북동'],[1276,'광우철구혜루'],
+[1277,'충충충'],[1282,'좀비'],[1289,'bisu.polo2'],[1310,'Tekken8'],[1323,'큐리슨'],[1333,'니엘형'],
+[1355,'아로케'],[1357,'썸머G★'],[1388,'쫄병'],[1390,'호랑수월가'],[1400,'식이'],[1444,'세멘'],
+[1457,'뉴썸머G★'],[1500,'짭예비형'],[1501,'심포니'],[1511,'애기뽀스2★'],[1515,'짭승환형'],[1574,'싸대기때리자'],
+[1577,'존1나작은가슴★'],[1579,'아기뭉멘'],[1587,'앞니69'],[1592,'빅더끼'],[1594,'맞나?!3★'],[1666,'만개화(희야버전)'],
+[1676,'피카츄69'],[1696,'골타69'],[1727,'까멘'],[1878,'덴빌형'],[1880,'큰첩멘'],[1888,'예멘'],
+[2000,'CNINE 20000'],[2002,'캔유필'],[2020,'큰호구모오'],[2024,'슈퍼영원한편돌이'],[2030,'킹황태자'],[2052,'큰도링'],
+[2069,'도파민69'],[2094,'큰 맞나★'],[2100,'큰 T-Money★'],[2109,'킹포커'],[2110,'큰천멘'],[2128,'큰랑죠★'],
+[2152,'BIG V12_Melody'],[2222,'레전드퍼킹뱅어'],[2223,'Love Sick'],[2252,'큰오승환'],[2333,'밀리언플레이스'],[2357,'캡틴 Summer.G★'],
+[2442,'큰라네트'],[2444,'큰세멘'],[2520,'큰로멘개'],[2574,'큰싸대기때리자'],[2579,'큰뭉멘'],[2676,'큰피카츄69'],
+[2696,'골타69'],[2727,'빅까멘'],[2888,'시아나'],[2892,'큰폴로'],[2911,'LAFESTAR'],[2972,'슈퍼까멘'],
+[2979,'슈퍼뭉크뭉'],[2986,'V12_Romance'],[2989,'대쫄병'],[2997,'1프로'],[2999,'예멘'],[3000,'BIG CNINE'],
+[3069,'69어셈블'],[8888,'예수님'],[10000,'POWER'],[10052,'십만로디'],[20000,'CNINE_200000'],[30000,'CNINE_300000'],
+  ];
 
+  function segOf(b) { return b <= 1009 ? 1 : b <= 1189 ? 2 : 3; }
+
+  var STORE = 'heeyahi_sig_v2';
   var DEFAULT = {
-    t: '하이희야 시그표',            // 제목
+    t: '하이희야 시그표',
     sp: 32,                          // 롤업 속도 px/초
     o: 0.87,                         // 배경 진하기(알파)
     sc: 1,                           // 배율
     hv: 1,                           // 마우스 올리면 멈춤
-    s: [
-      { b: 100,   n: '하트시그' },
-      { b: 200,   n: '윙크시그' },
-      { b: 300,   n: '냥냥댄스' },
-      { b: 400,   n: '삐끼삐끼' },
-      { b: 500,   n: '제로투' },
-      { b: 700,   n: '애교 3종 세트' },
-      { b: 1000,  n: '힙합댄스' },
-      { b: 1414,  n: '식사권' },
-      { b: 2000,  n: '사투리 애교' },
-      { b: 3000,  n: '방셀 1컷' },
-      { b: 5000,  n: '역팬' },
-      { b: 7000,  n: '엔딩 포즈' },
-      { b: 10000, n: '풀방셀' }
-    ]
+    r: 0,                            // 보여줄 구간 (0 = 전체)
+    s: SIGDATA.map(function (p) { return { b: p[0], n: p[1] }; })
   };
+  var TOTAL = DEFAULT.s.length;
 
   var $ = function (id) { return document.getElementById(id); };
   var params = new URLSearchParams(location.search);
@@ -378,30 +435,44 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     var d = {
       t: o.t != null ? String(o.t) : DEFAULT.t,
       sp: Number(o.sp), o: Number(o.o), sc: Number(o.sc),
+      r: Number(o.r) || 0,
       hv: o.hv === 0 || o.hv === '0' || o.hv === false ? 0 : 1,
-      s: Array.isArray(o.s) ? o.s : clone(DEFAULT.s)
+      s: Array.isArray(o.s) && o.s.length ? o.s : DEFAULT.s
     };
     d.t = d.t.slice(0, 20) || DEFAULT.t;
     d.sp = isFinite(d.sp) ? Math.min(90, Math.max(8, d.sp)) : DEFAULT.sp;
     d.o = isFinite(d.o) ? Math.min(1, Math.max(0.45, d.o)) : DEFAULT.o;
     d.sc = isFinite(d.sc) ? Math.min(1.6, Math.max(0.5, d.sc)) : DEFAULT.sc;
+    d.r = d.r >= 1 && d.r <= 3 ? d.r : 0;
     d.s = d.s.map(function (x) {
       return { b: Math.max(0, Math.min(9999999, Number(x && x.b) || 0)), n: String((x && x.n) || '').slice(0, 24) };
-    }).slice(0, 40);
-    if (!d.s.length) d.s = clone(DEFAULT.s);
+    }).slice(0, 400);
+    if (!d.s.length) d.s = DEFAULT.s;
     return d;
   }
 
   function load() {
     var raw = params.get('d');
+    var st;
     if (raw) {
-      try { return norm(JSON.parse(b64d(raw))); } catch (e) { /* 잘못된 링크면 기본값 */ }
+      try { st = norm(JSON.parse(b64d(raw))); } catch (e) { st = null; }
     }
-    try {
-      var ls = localStorage.getItem(STORE);
-      if (ls) return norm(JSON.parse(ls));
-    } catch (e) { /* 저장소를 못 쓰는 브라우저(프릭샷 등)는 기본값 */ }
-    return norm(clone(DEFAULT));
+    if (!st) {
+      try {
+        var ls = localStorage.getItem(STORE);
+        if (ls) st = norm(JSON.parse(ls));
+      } catch (e) { /* 저장소를 못 쓰는 브라우저(프릭샷 등)는 기본값 */ }
+    }
+    if (!st) st = norm(clone(DEFAULT));
+
+    // ?range=1|2|3 (구간) — ?range=1000 처럼 숫자를 주면 그 개수 이상만
+    var rq = params.get('range');
+    if (rq != null && rq !== '') {
+      if (/^(all|0)$/i.test(rq)) st.r = 0;
+      else if (/^[1-3]$/.test(rq)) st.r = Number(rq);
+      else if (/^\d+$/.test(rq)) { st.r = 0; st.min = Number(rq); }
+    }
+    return st;
   }
 
   var S = load();
@@ -426,14 +497,27 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     return '<span class="badge ' + tierCls(b) + '">' + emojiOf(b) + ' ' + fmt(b) + '</span>';
   }
 
+  function visibleItems() {
+    if (!S.r && !S.min) return S.s;
+    return S.s.filter(function (it) {
+      if (S.r && segOf(it.b) !== S.r) return false;
+      if (S.min && it.b < S.min) return false;
+      return true;
+    });
+  }
+
   /* ---------------- 오버레이 그리기 ---------------- */
-  var trackEl = $('track'), listEl = $('list'), wrapEl = $('wrap'), cardEl = $('card'), stageEl = $('stage');
+  var trackEl = $('track'), listEl = $('list'), stageEl = $('stage');
 
   function rowsHTML() {
-    return S.s.map(function (it, i) {
-      return '<div class="row" data-i="' + i + '">' + badgeHTML(it) +
-             '<span class="name">' + esc(it.n) + '</span></div>';
-    }).join('');
+    var html = '';
+    S.s.forEach(function (it, i) {
+      if (S.r && segOf(it.b) !== S.r) return;
+      if (S.min && it.b < S.min) return;
+      html += '<div class="row" data-i="' + i + '">' + badgeHTML(it) +
+              '<span class="name">' + esc(it.n) + '</span></div>';
+    });
+    return html || '<div class="empty">이 구간에는 시그가 없어요</div>';
   }
 
   function renderTrack() {
@@ -441,8 +525,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     trackEl.innerHTML = '<div class="blk">' + block + '</div>';
     var blkH = trackEl.firstChild.offsetHeight || 1;   // transform(배율)에 영향받지 않는 높이
     var listH = listEl.clientHeight || 396;
-    // 한 바퀴에 화면이 비지 않도록 복사본 개수를 정한다
-    var copies = Math.max(2, Math.ceil(listH / blkH) + 1);
+    var copies = Math.max(2, Math.ceil(listH / blkH) + 1);   // 화면이 비지 않을 만큼 복사
     var html = '';
     for (var c = 0; c < copies; c++) html += '<div class="blk">' + block + '</div>';
     trackEl.innerHTML = html;
@@ -451,6 +534,13 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     trackEl.style.animationName = 'none';
     void trackEl.offsetWidth;           // 애니메이션 재시작
     trackEl.style.animationName = '';
+    updateSegInfo();
+  }
+
+  function updateSegInfo() {
+    var n = visibleItems().length;
+    var info = $('segInfo');
+    if (info) info.textContent = (S.r ? S.r + '구간 · ' + n + '개' : '전체 · ' + n + '개');
   }
 
   function applyStyle() {
@@ -477,15 +567,16 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   /* ---------------- 프릭샷 URL ---------------- */
   function shareURL() {
     var base = location.origin + location.pathname;
-    var data = { t: S.t, sp: S.sp, o: Math.round(S.o * 100) / 100, sc: S.sc, hv: S.hv, s: S.s };
-    return base + '?d=' + b64e(JSON.stringify(data));
+    var data = { t: S.t, sp: S.sp, o: Math.round(S.o * 100) / 100, sc: S.sc, hv: S.hv, r: S.r, s: S.s };
+    return base + '?d=' + b64e(JSON.stringify(data)) + (S.r ? '&range=' + S.r : '');
   }
 
   /* ---------------- 편집 패널 ---------------- */
   var fTitle = $('fTitle'), fOpacity = $('fOpacity'), fScale = $('fScale'),
       fHover = $('fHover'), fUrl = $('fUrl'), editorList = $('editorList'),
-      speedSeg = $('speedSeg'), bgSeg = $('bgSeg'), oVal = $('oVal'), scVal = $('scVal'),
-      cntEl = $('cnt'), savedMsg = $('savedMsg');
+      speedSeg = $('speedSeg'), bgSeg = $('bgSeg'), segSeg = $('segSeg'),
+      oVal = $('oVal'), scVal = $('scVal'), cntEl = $('cnt'), savedMsg = $('savedMsg'),
+      fSearch = $('fSearch');
   var saveTimer = null;
 
   function markSaved() {
@@ -513,6 +604,20 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     });
     editorList.innerHTML = html;
     cntEl.textContent = S.s.length + '개';
+    $('totalCnt').textContent = TOTAL;
+    applySearch();
+  }
+
+  function applySearch() {
+    var q = (fSearch.value || '').trim().toLowerCase();
+    var rows = editorList.querySelectorAll('.erow');
+    for (var k = 0; k < rows.length; k++) {
+      var r = rows[k];
+      if (!q) { r.classList.remove('hide'); continue; }
+      var it = S.s[Number(r.dataset.i)];
+      var hay = it ? (it.n + ' ' + it.b).toLowerCase() : '';
+      r.classList.toggle('hide', hay.indexOf(q) === -1);
+    }
   }
 
   function syncControls() {
@@ -522,16 +627,20 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     fScale.value = Math.round(S.sc * 100);
     scVal.textContent = Math.round(S.sc * 100) + '%';
     fHover.checked = !!S.hv;
+    var i;
     var btns = speedSeg.querySelectorAll('button');
-    for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', Number(btns[i].dataset.sp) === S.sp);
+    for (i = 0; i < btns.length; i++) btns[i].classList.toggle('on', Number(btns[i].dataset.sp) === S.sp);
+    var sb = segSeg.querySelectorAll('button');
+    for (i = 0; i < sb.length; i++) sb[i].classList.toggle('on', Number(sb[i].dataset.r) === S.r);
     fUrl.value = shareURL();
+    updateSegInfo();
   }
 
   function startEdit() {
     document.body.classList.add('editing');
     $('panel').hidden = false;
-    var bg = params.get('bg') || 'dark';
-    setPreviewBg(bg);
+    var bg = params.get('bg');
+    setPreviewBg(bg === 'light' || bg === 'check' ? bg : 'dark');
     renderEditorList();
     syncControls();
   }
@@ -551,6 +660,21 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     save();
   });
 
+  /* 구간 */
+  segSeg.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    S.r = Number(btn.dataset.r) || 0;
+    delete S.min;
+    var sb = segSeg.querySelectorAll('button');
+    for (var i = 0; i < sb.length; i++) sb[i].classList.toggle('on', sb[i] === btn);
+    renderTrack();
+    save();
+  });
+
+  /* 검색 */
+  fSearch.addEventListener('input', applySearch);
+
   /* 목록 편집 */
   editorList.addEventListener('input', function (e) {
     var erow = e.target.closest('.erow');
@@ -561,6 +685,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
       var v = Math.max(0, Math.min(9999999, Number(String(e.target.value).replace(/[^\d]/g, '')) || 0));
       S.s[i].b = v;
       updateRowInTrack(i);
+      updateSegInfo();
     } else if (e.target.classList.contains('e-n')) {
       S.s[i].n = e.target.value.slice(0, 24);
       updateRowInTrack(i);
@@ -593,8 +718,10 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     renderEditorList();
     renderTrack();
     save();
-    editorList.lastElementChild.querySelector('.e-n').focus();
-    editorList.lastElementChild.querySelector('.e-n').select();
+    var lastRow = editorList.lastElementChild;
+    var inp = lastRow.querySelector('.e-n');
+    inp.focus(); inp.select();
+    lastRow.scrollIntoView({ block: 'nearest' });
   });
 
   /* 속도 */
@@ -642,7 +769,11 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   $('copyBtn').addEventListener('click', function () {
     var url = shareURL();
     fUrl.value = url;
-    var done = function () { savedMsg.textContent = '✔ 프릭샷 URL 복사 완료!'; clearTimeout(saveTimer); saveTimer = setTimeout(function () { savedMsg.textContent = ''; }, 2600); };
+    var done = function () {
+      savedMsg.textContent = '✔ 프릭샷 URL 복사 완료!';
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function () { savedMsg.textContent = ''; }, 2600);
+    };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url).then(done, function () { fUrl.select(); document.execCommand('copy'); done(); });
     } else {
@@ -654,7 +785,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
 
   /* 초기화 */
   $('resetBtn').addEventListener('click', function () {
-    if (!confirm('예시 시그 목록으로 되돌릴까요? 지금 목록은 사라져요.')) return;
+    if (!confirm('처음 시그표(294개)로 되돌릴까요? 지금 목록은 사라져요.')) return;
     S = norm(clone(DEFAULT));
     renderEditorList();
     syncControls();
@@ -667,7 +798,6 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   applyStyle();
   renderTrack();
 
-  // 웹폰트가 늦게 오면 줄 높이가 달라지므로 한 번 더 계산
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(function () { renderTrack(); }).catch(function () {});
   }
