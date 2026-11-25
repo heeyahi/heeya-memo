@@ -556,8 +556,13 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   }
 
   /* ---------------- 프릭샷 URL ---------------- */
+  function isDefault() {
+    return S.t === DEFAULT.t && S.sp === DEFAULT.sp && S.o === DEFAULT.o && S.sc === DEFAULT.sc &&
+           S.hv === DEFAULT.hv && JSON.stringify(S.s) === JSON.stringify(DEFAULT.s);
+  }
   function shareURL() {
     var base = location.origin + location.pathname;
+    if (isDefault()) return base + (S.r ? '?range=' + S.r : '');   // 수정 없으면 짧은 주소
     var data = { t: S.t, sp: S.sp, o: Math.round(S.o * 100) / 100, sc: S.sc, hv: S.hv, r: S.r, s: S.s };
     return base + '?d=' + b64e(JSON.stringify(data)) + (S.r ? '&range=' + S.r : '');
   }
