@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>시그표 저장값 마이그레이션 확인 (임시)</title>
+<style>
+  body{margin:0;background:#111;color:#eee;font:12px/1.5 monospace;padding:12px}
+  iframe{width:380px;height:800px;border:0;display:block;background:#000}
+  pre{background:#1d1d26;padding:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<pre id="out">…</pre>
+<iframe id="f" src="about:blank"></iframe>
+<script>
+  // v3 저장값(구버전 기본 속도 32 · 박스 없음 0%)을 심어 두고 sig 페이지를 띄운다.
+  localStorage.removeItem('heeyahi_sig_v4');
+  localStorage.setItem('heeyahi_sig_v3', JSON.stringify({ v: 3, t: '하이희야 시그표', sp: 32, o: 0, sc: 1, hv: 1, r: 0 }));
+  var f = document.getElementById('f');
+  f.src = '../sig/?bg=light';
+  f.onload = function () {
+    setTimeout(function () {
+      try {
+        var d = f.contentDocument;
+        var tr = d.querySelector('.track');
+        var blk = tr.firstElementChild;
+        var dur = parseFloat(tr.style.getPropertyValue('--dur'));
+        var card = getComputedStyle(d.querySelector('.card'));
+        var name = getComputedStyle(d.querySelector('.name'));
+        document.getElementById('out').textContent = [
+          'v3 저장값: sp=32, o=0',
+          '→ body class : ' + d.body.className,
+          '→ 롤업 속도  : ' + (blk.offsetHeight / dur).toFixed(1) + ' px/s (블록 ' + blk.offsetHeight + 'px / ' + dur + 's)',
+          '→ 카드 바탕  : ' + card.backgroundImage.slice(0, 90),
+          '→ 글씨       : ' + name.fontSize + ' / ' + name.fontWeight,
+          '→ 콘솔 에러  : ' + JSON.stringify(f.contentWindow.__sigErrors)
+        ].join('\n');
+      } catch (e) { document.getElementById('out').textContent = 'ERR ' + e; }
+    }, 2500);
+  };
+</script>
+</body>
+</html>
