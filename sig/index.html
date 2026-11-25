@@ -466,7 +466,14 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
     if (!st) {
       try {
         var ls = localStorage.getItem(STORE);
-        if (ls) st = norm(JSON.parse(ls));
+        if (ls) {
+          var old = JSON.parse(ls);
+          st = norm(old);
+          // 예전 판(기본 87%)이 그 브라우저에 저장돼 있던 경우엔 새 기본(25%)으로 옮겨 준다
+          if (!old || old.v !== 2) {
+            if (Math.abs(st.o - 0.87) < 0.005) st.o = DEFAULT.o;
+          }
+        }
       } catch (e) { /* 저장소를 못 쓰는 브라우저(프릭샷 등)는 기본값 */ }
     }
     if (!st) st = norm(clone(DEFAULT));
@@ -617,6 +624,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   }
 
   function save() {
+    S.v = 2;
     try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {}
     if (editMode) { fUrl.value = shareURL(); markSaved(); }
   }
