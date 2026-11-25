@@ -129,10 +129,11 @@ body.hv .wrap:hover .track{animation-play-state:paused}
 .badge.t5{background:linear-gradient(135deg,#8A1249,#4A0A26)}
 .name{
   font-size:18px; font-weight:800; letter-spacing:-.5px; line-height:1.25;
-  color:#24161D;
-  text-shadow:0 1px 0 rgba(255,255,255,.95), 0 0 3px rgba(255,255,255,.7);
+  color:#1C1015;
+  text-shadow:0 1px 0 rgba(255,255,255,.75);
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
+.badge .em{filter:drop-shadow(0 1px 0 rgba(86,0,38,.55))}
 .empty{padding:26px 10px;text-align:center;font-weight:800;color:#a8617f;font-size:14px}
 
 /* ================= 편집 모드 ================= */
@@ -487,7 +488,7 @@ input[type=range]{width:100%;accent-color:#EE3A78;margin:0}
   function emojiOf(b) { return b >= 10000 ? '💎' : b >= 3000 ? '👑' : b >= 1000 ? '💖' : '🎈'; }
   function badgeHTML(it) {
     var b = Number(it.b) || 0;
-    return '<span class="badge ' + tierCls(b) + '">' + emojiOf(b) + ' ' + fmt(b) + '</span>';
+    return '<span class="badge ' + tierCls(b) + '"><span class="em">' + emojiOf(b) + '</span> ' + fmt(b) + '</span>';
   }
 
   function visibleItems() {
