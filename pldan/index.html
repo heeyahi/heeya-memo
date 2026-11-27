@@ -51,9 +51,9 @@ body{
 }
 
 /* ===== 등급별 포인트 컬러 ===== */
-[data-g="aven"] {--a1:#FFE0A6;--a2:#F3A64C;--at:#FFE9BE;--agl:rgba(255,196,116,.30);--agb:rgba(255,201,130,.55)}
-[data-g="sig"]  {--a1:#FFC8DE;--a2:#FF85B6;--at:#FFDCEB;--agl:rgba(255,148,190,.30);--agb:rgba(255,160,198,.55)}
-[data-g="noise"]{--a1:#DFD8FF;--a2:#B29CFF;--at:#E6E0FF;--agl:rgba(186,166,255,.28);--agb:rgba(196,178,255,.55)}
+[data-g="aven"] {--a1:#FFE0A6;--a2:#F3A64C;--a3:#C07A29;--at:#FFE9BE;--agl:rgba(255,196,116,.30);--agb:rgba(255,201,130,.55)}
+[data-g="sig"]  {--a1:#FFC8DE;--a2:#FF85B6;--a3:#D2507F;--at:#FFDCEB;--agl:rgba(255,148,190,.30);--agb:rgba(255,160,198,.55)}
+[data-g="noise"]{--a1:#DFD8FF;--a2:#B29CFF;--a3:#7B65C9;--at:#E6E0FF;--agl:rgba(186,166,255,.28);--agb:rgba(196,178,255,.55)}
 
 /* ===== 무대 배경 (편집 미리보기) ===== */
 body.theme-smoke:not(.live){
@@ -73,10 +73,10 @@ body.theme-none:not(.live){
 }
 body.theme-pink:not(.live){
   background:
-    radial-gradient(56% 46% at 20% 14%, #FFF4F9, transparent 74%),
-    radial-gradient(52% 44% at 82% 22%, #FFE6F2, transparent 74%),
-    radial-gradient(46% 40% at 46% 96%, #F1E9FF, transparent 72%),
-    linear-gradient(150deg,#FFFBFD,#FFEDF5 52%,#F4EDFF);
+    radial-gradient(56% 46% at 20% 14%, #FFE3F1, transparent 74%),
+    radial-gradient(52% 44% at 82% 22%, #FFD2E7, transparent 74%),
+    radial-gradient(46% 40% at 46% 96%, #E7DAFF, transparent 72%),
+    linear-gradient(150deg,#FFE9F4,#FFD7EA 52%,#EDE3FF);
 }
 body.live{background:transparent !important;background-color:transparent !important}
 
@@ -196,11 +196,35 @@ body.theme-none .col{
 }
 /* 파스텔 핑크 유리 */
 body.theme-pink .col{
-  background:linear-gradient(158deg,rgba(255,216,235,.44) 0%,rgba(255,182,217,.36) 100%);
-  border:1px solid rgba(255,255,255,.46);
-  box-shadow:0 14px 36px rgba(92,22,62,.18),inset 0 1px 0 rgba(255,255,255,.5);
+  background:linear-gradient(158deg,rgba(255,232,243,.96) 0%,rgba(255,203,227,.94) 100%);
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 16px 38px rgba(92,22,62,.22),inset 0 1px 0 rgba(255,255,255,.8);
   backdrop-filter:blur(8px) saturate(1.08);-webkit-backdrop-filter:blur(8px) saturate(1.08);
 }
+/* 핑크 테마는 바탕이 밝으니 흰 글씨 대신 진한 자주색 글씨로 */
+body.theme-pink .bhead h1{
+  color:#4A1F35;
+  text-shadow:
+    -1.2px -1.2px 0 rgba(255,255,255,.85), 0 -1.2px 0 rgba(255,255,255,.85), 1.2px -1.2px 0 rgba(255,255,255,.85),
+    -1.2px 0 0 rgba(255,255,255,.85), 1.2px 0 0 rgba(255,255,255,.85),
+    -1.2px 1.2px 0 rgba(255,255,255,.85), 0 1.2px 0 rgba(255,255,255,.85), 1.2px 1.2px 0 rgba(255,255,255,.85),
+    0 6px 18px rgba(120,30,80,.22);
+}
+body.theme-pink .bsub{color:rgba(74,31,53,.62);text-shadow:0 1px 0 rgba(255,255,255,.6)}
+body.theme-pink .chd .gn{color:#4A1F35;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+body.theme-pink .nm{color:#411C2F;text-shadow:0 1px 0 rgba(255,255,255,.55)}
+body.theme-pink .row.done .nm{text-decoration-color:rgba(65,28,47,.5)}
+body.theme-pink .mm{color:rgba(65,28,47,.78);text-shadow:none}
+body.theme-pink .amt{
+  color:#fff;text-shadow:0 1px 3px rgba(70,10,40,.45);
+  background:linear-gradient(135deg,var(--a2),var(--a3));border-color:rgba(255,255,255,.5);
+}
+body.theme-pink .chk{border-color:rgba(65,28,47,.35)}
+body.theme-pink .row:hover .chk{border-color:rgba(65,28,47,.7)}
+body.theme-pink .del{background:rgba(65,28,47,.13);color:#4A1F35}
+body.theme-pink .del:hover{background:rgba(214,64,128,.9);color:#fff}
+body.theme-pink .empty{color:rgba(65,28,47,.55);border-color:rgba(65,28,47,.2)}
+body.theme-pink .cnt{color:#2A1018}
 
 .chd{
   flex:0 0 auto;display:flex;align-items:center;gap:8px;
@@ -252,6 +276,10 @@ body.theme-pink .row:hover{background:rgba(255,255,255,.34)}
   background:transparent;pointer-events:none;
 }
 body.theme-none .row + .row::before{background:rgba(255,255,255,.16)}
+/* 투명 모드: 어떤 장면 위에도 읽히게 개수·메모는 진한 알약으로 */
+body.theme-none .amt{background:linear-gradient(135deg,var(--a2),var(--a3));border-color:rgba(255,255,255,.4);box-shadow:0 2px 8px rgba(0,0,0,.35)}
+body.theme-none .mm{color:#fff;text-shadow:var(--ol-sm),0 1px 4px rgba(0,0,0,.75)}
+body.theme-none .bsub{color:#fff;text-shadow:var(--ol-sm),0 2px 8px rgba(0,0,0,.65)}
 body.theme-pink .row + .row::before{background:rgba(255,255,255,.45)}
 
 .chk{
