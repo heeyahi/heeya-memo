@@ -79,6 +79,13 @@ body.theme-pink:not(.live){
     linear-gradient(150deg,#FFE9F4,#FFD7EA 52%,#EDE3FF);
 }
 body.live{background:transparent !important;background-color:transparent !important}
+/* ?bg=1 — 실제 장면 대신 어두운 무대를 깔아 방송 화면을 미리보기 */
+body.pvb{
+  background:radial-gradient(58% 48% at 14% 12%, rgba(255,120,180,.16), transparent 72%),
+    radial-gradient(52% 46% at 86% 18%, rgba(124,96,255,.16), transparent 72%),
+    linear-gradient(160deg,#0f0a16,#171021 50%,#07050c) !important;
+  background-color:#0d0913 !important;
+}
 
 /* ===== 앱 뼈대 ===== */
 .app{position:relative;display:flex;flex-direction:column;height:100%;min-height:0}
@@ -164,14 +171,14 @@ body.live{background:transparent !important;background-color:transparent !import
 .bhead h1{
   margin:0;font-size:clamp(22px,2.35vw,46px);font-weight:900;letter-spacing:-.035em;line-height:1.2;
   color:#fff;text-align:center;
-  text-shadow:var(--ol),0 4px 16px rgba(0,0,0,.6);
+  text-shadow:var(--ol),0 0 26px rgba(0,0,0,.7),0 0 46px rgba(0,0,0,.55),0 4px 16px rgba(0,0,0,.6);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
   border-radius:10px;
 }
 .bhead h1[contenteditable="true"]{cursor:text;outline:none;padding:0 8px}
 .bhead h1[contenteditable="true"]:hover{background:rgba(255,255,255,.08)}
 .bhead h1[contenteditable="true"]:focus{background:rgba(255,255,255,.12);outline:2px dashed rgba(255,175,210,.7);outline-offset:2px}
-.bsub{font-size:clamp(12px,.95vw,18px);font-weight:900;color:rgba(255,255,255,.62);letter-spacing:.01em;text-shadow:0 2px 8px rgba(0,0,0,.6);font-variant-numeric:tabular-nums}
+.bsub{font-size:clamp(12px,.95vw,18px);font-weight:900;color:rgba(255,255,255,.72);letter-spacing:.01em;text-shadow:0 0 12px rgba(0,0,0,.85),0 2px 8px rgba(0,0,0,.7);font-variant-numeric:tabular-nums}
 .bsub .em{color:rgba(255,205,228,.95)}
 
 .board{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -362,11 +369,11 @@ body.live .col{border-radius:16px}
   font:inherit;font-size:11.5px;font-weight:900;cursor:pointer;
   padding:7px 12px;border-radius:999px;
   border:1px solid rgba(255,255,255,.28);background:rgba(10,6,14,.72);color:#fff;
-  opacity:0;pointer-events:none;transition:opacity .2s;
+  opacity:.18;pointer-events:auto;transition:opacity .2s;
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 }
-body.live:hover .liveexit{opacity:.85;pointer-events:auto}
 .liveexit:hover{opacity:1}
+body:not(.live) .liveexit{opacity:0;pointer-events:none}
 
 /* ===== 좁은 화면 ===== */
 @media (max-width:900px){
@@ -477,6 +484,17 @@ body.live:hover .liveexit{opacity:.85;pointer-events:auto}
   var form = $('#addForm');
   var liveBtn = $('#btnLive');
   var savedTag = $('#savedTag');
+
+  /* ?bg=1 : 방송 배경 미리보기 */
+  try {
+    var q = {};
+    (location.search.replace(/^\?/, '') || '').split('&').forEach(function (kv) {
+      if (!kv) return;
+      var p = kv.split('=');
+      q[decodeURIComponent(p[0])] = decodeURIComponent(p[1] || '');
+    });
+    if (q.bg && q.bg !== '0') body.classList.add('pvb');
+  } catch (e) {}
 
   /* ---------- 유틸 ---------- */
   function esc(s) {
