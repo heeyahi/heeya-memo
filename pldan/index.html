@@ -49,7 +49,7 @@ body{
     -1.15px 0 0 var(--olc), 1.15px 0 0 var(--olc),
     -1.15px 1.15px 0 var(--olc), 0 1.15px 0 var(--olc), 1.15px 1.15px 0 var(--olc);
   /* 세로 패널 폭 — 방송 화면 한쪽 구석에 붙이기 좋은 크기 */
-  --panel-w:460px;
+  --panel-w:440px;
 }
 
 /* ===== 등급별 포인트 컬러 ===== */
@@ -354,10 +354,11 @@ body.theme-pink .chk{border-color:rgba(57,21,38,.32)}
 .row.done .chk::after{content:"✓"}
 
 .nm{
-  flex:1 1 auto;min-width:0;font-weight:900;letter-spacing:-.035em;line-height:1.24;
+  flex:0 1 auto;min-width:0;font-weight:900;letter-spacing:-.035em;line-height:1.24;
   color:#fff;text-shadow:var(--ol),0 3px 10px rgba(0,0,0,.55);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
+.board.horiz .nm{flex:1 1 auto}
 .row.done .nm{opacity:.4;text-decoration:line-through;text-decoration-thickness:.055em;text-decoration-color:rgba(255,255,255,.55)}
 .amt{
   flex:0 0 auto;font-weight:900;line-height:1.25;
@@ -370,7 +371,7 @@ body.theme-pink .chk{border-color:rgba(57,21,38,.32)}
 .board.horiz .amt{font-size:.68em;padding:.16em .56em}
 .row.done .amt{opacity:.35}
 .mm{
-  flex:0 1 auto;min-width:0;
+  flex:0 1 auto;min-width:0;margin-right:auto;
   font-weight:800;line-height:1.25;
   color:rgba(255,255,255,.92);text-shadow:0 1px 5px rgba(0,0,0,.7);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
